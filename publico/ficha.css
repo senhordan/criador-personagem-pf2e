@@ -1,0 +1,509 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: sans-serif;
+  user-select: none;
+  background-color: #EFECE7;
+}
+.container{
+  border: 4px solid #13265F;
+  width: 470px;
+  margin: auto;
+  background-color: #9C5740;
+}
+.table_titulo{
+  background-color: #13265F;
+  background: #07153e;
+  background: linear-gradient(0deg, #112352 0%, #152b61 100%);
+/*      #162553*/
+/*      display: inline;*/
+      width: 100%;
+  color: #fff;
+  text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
+
+  padding-top: .1em;
+  padding-bottom: .1em;
+  text-align: center;
+  margin: auto;
+  font-size: 1.8em;
+  font-family: serif;
+  font-weight: bold;
+  border: 1px solid black;
+/*      cursor: pointer;*/
+}
+.subtitulo{
+  background-color: #13265F;
+  width: 100%;
+  color: #fff;
+  text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
+  padding-top: .1em;
+  padding-bottom: .1em;
+  border: 1px solid black;
+  text-align: center;
+  margin: auto;
+  font-size: 1em;
+  font-family: serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.row:not(:first-child){
+  padding: .3em;
+}
+.col{
+  display: inline-block;
+  text-align: center;
+}
+.texto-menor{
+  color: white;
+  font-size: .9em;
+  font-weight: bold;
+  text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
+}
+.texto-maior{
+  font-size: 1.3em;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
+}
+.proficiencia_radio{
+  text-align: center;
+}
+.proficiencia_radio table{
+  border-collapse: collapse;
+  display: inline;
+}
+.proficiencia_radio table td{
+  padding: 0 .1em;
+}
+.proficiencia_radio table *{
+  padding-top: 0;
+}
+.proficiencia_radio span{
+  font-size: .8em;
+  margin: 0;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
+
+}
+.proficiencia_radio [type='radio']{
+  margin: 0;
+/*  width: 1em;*/
+/*  height: 1em;*/
+}
+select{
+  font-size: 1.4em;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: #5A0A00;
+  border-style: flat;
+  color: #000;
+  text-align: center;
+  background-color: #fff;
+}
+input{
+  font-size: 1.5em;
+  border-radius: 5px;
+  background-color: #fff;
+  border-color: #5A0A00;
+  border-style: flat;
+  color: #000;
+  text-align: center;
+}
+input[type="checkbox"]{
+  height: 1.5em;
+  width: 1.5em;
+  background-color: red;
+  border-radius: 15px;
+}
+input[type="number"]{
+  width: 2em;
+}
+label{
+  color: white;
+  text-shadow: 2px 0 #5A0A00, -2px 0 #5A0A00, 0 2px #5A0A00, 0 -2px #5A0A00,
+           1px 1px #5A0A00, -1px -1px #5A0A00, 1px -1px #5A0A00, -1px 1px #5A0A00;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+
+#editar_visualizar .row{
+  text-align: center;
+/*  border: 4px ridge #00000080;*/
+}
+#editar_visualizar .col{
+  cursor: pointer;
+  width: 100%;
+  background: linear-gradient(0deg, rgb(66, 7, 0) 0%, rgb(90, 10, 0) 100%);
+}
+/*      GERAL     */
+
+#geral {
+  text-align: center;
+}
+[name="TENDENCIA"]{
+  user-select: none;
+  width: 2em;
+}
+[name="TENDENCIA"][type="text"]{
+  display: none;
+}
+[name="DIVINDADE"]{
+  width: 9.5em;
+}
+#tendência table, #tendência tr, #tendência td{
+  border: 2px ridge; #fff;
+  background-color: #5A0A00;
+}
+#tendência table{
+  margin: auto;
+  text-align: center;
+  border-collapse: collapse;
+  color: white;
+  font-weight: bold;
+}
+#tendência td{
+  width: 33%;
+  padding: .5em;
+}
+#tendência tr{
+  height: 3em;
+}
+[name="HP"]{
+  margin: 0 1.9em;
+}
+[name="NPC_PC"][value="PC"]+span{
+  margin-right: 2em;
+}
+.col:has([name="NPC_PC"]){
+  margin-bottom: .5em;
+}
+input[type="number"][name="VELOCIDADE"]{
+  width: 2.5em;
+}
+
+/*      PERCEPÃO     */
+
+#percepção .row{
+  display: flex;
+  justify-content: space-around;
+}
+
+#percepção .row{
+  margin-top: 1em;
+}
+
+/*      JOGADAS DE SALVAMENTO     */
+
+#salvamentos{
+  text-align: center;
+}
+
+#salvamentos .row:has([name="FORTITUDE"]){
+  margin-top: 1em;
+}
+
+#salvamentos .row{
+  display: flex;
+  justify-content: space-around;
+}
+/*      CD DE CLASSE     */
+
+#CD_classe .row{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1em;
+}
+
+/*      CRIAÇÃO ATRIBUTOS     */
+
+#criação_atributos .row{
+  display: flex;
+  justify-content: space-around;
+/*  margin-top: 1em;*/
+}
+
+#criação_atributos .aumento{
+  color: lightgreen;
+  text-shadow: 2px 0 #005a0e, -2px 0 #005a0e, 0 2px #005a0e, 0 -2px #005a0e, 1px 1px #005a0e, -1px -1px #005a0e, 1px -1px #005a0e, -1px 1px #005a0e;
+}
+#criação_atributos .penalidade{
+  color: orangered;
+  text-shadow: 2px 0 #5A0A00, -2px 0 #5A0A00, 0 2px #5A0A00, 0 -2px #5A0A00, 1px 1px #5A0A00, -1px -1px #5A0A00, 1px -1px #5A0A00, -1px 1px #5A0A00;
+}
+#criação_atributos .row:has(.aumento)+.row input{
+  outline: 2px double lightgreen;
+}
+#criação_atributos .row:has(.penalidade)+.row input{
+  outline: 2px double orangered;
+}
+
+/*      ATRIBUTOS     */
+
+#atributos .row{
+  display: flex;
+/*  justify-content: space-around;*/
+/*  margin-top: 1em;*/
+}
+#atributos .col:not(.table_titulo){
+  width: 33%;
+}
+#atributos .row:has([name="FOR"]){
+  margin-top: 1em;
+}
+
+#atributos label{
+  font-size: 1.5em;
+}
+
+/*      PERICIAS     */
+
+#pericias{
+  text-align: center;
+}
+
+#pericias .row:has([type="radio"]){
+  text-align: left;
+  display: flex;
+/*  justify-content: space-around;*/
+}
+#pericias .row:has([type="radio"]) .col{
+  margin: 0 1em;
+/*  justify-content: space-around;*/
+}
+#pericias .row:has([name="pericias_penalidade_armadura"]){
+  margin: .5em 0;
+}
+#pericias .row:has(label){
+  padding-top: .5em;
+  border-top: 2px solid #5A0A00;
+}
+#pericias label{
+  font-size: 1.5em;
+}
+#pericias [type="text"]{
+  margin-left: .2em;
+  min-width: 3em;
+  width: 3em;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid #5A0A00;
+  border-radius: 0;
+  color: white;
+  text-align: left;
+  text-shadow: 2px 0 #5A0A00, -2px 0 #5A0A00, 0 2px #5A0A00, 0 -2px #5A0A00, 1px 1px #5A0A00, -1px -1px #5A0A00, 1px -1px #5A0A00, -1px 1px #5A0A00;
+  font-weight: bold;
+
+}
+
+/*      CA       */
+
+#CA .row{
+  margin: 1em 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+#armaduras .row{
+  border-top: 2px solid #5A0A00;
+  padding: 1em 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+/*      ESCUDO       */
+
+#escudo .row{
+  margin: 1em 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+/*      HABILIDADES TALENTOS       */
+
+#habilidades_talentos .row:has(#adicionar_habilidade){
+  text-align: center;
+  margin: 1em;
+}
+#habilidades_talentos .row:has([name*="NOME"]){
+  border-top: 2px solid #5A0A00;
+  padding-top: 1em;
+}
+#habilidades_talentos .row:not([class*="talento"]):not([class*="habilidade"]){
+  display: flex;
+  justify-content: space-around;
+}
+#habilidades_talentos [name*="NOME"]{
+  width: 5.5em;
+  text-align: left;
+}
+#habilidades_talentos #adicionar_habilidade{
+  background-color: #5A0A00;
+  padding: .5em;
+  border-radius: 15px;
+  border-style: ridge;
+  border-color: #ffffff70;
+  cursor: pointer;
+}
+.row:has([value="remover"]){
+  display: flex;
+  justify-content: space-around;
+
+}
+.col:has(textarea){
+  width: 100%;
+}
+textarea{
+  width: 100%;
+  border-radius: 5px;
+  font-size: 1.3em;
+}
+[value="editar"], [value="salvar"], [value="chat"]{
+  font-size: 1em;
+  padding: .1em;
+  background-color: #13265F;
+  color: #fff;
+  font-weight: bold;
+  border-color: #13265F;
+  cursor: pointer;
+}
+
+[value="remover"]{
+  font-size: 1em;
+  padding: .1em;
+  background-color: #5A0A00;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+.mostrar{
+  border: 2px solid #00000060;
+  border-radius: 15px;
+  margin: .5em 0;
+}
+.mostrar .row:has(label), .mostrar label{
+  cursor: pointer;
+}
+.row[class*="talento"], .row[class*="habilidade"]{
+  display: flex;
+  justify-content: space-between;
+  padding: .5em;
+}
+.mostrar:has(.row.talento-de-ancestralidade){
+  background-color: #00000060;
+}
+.mostrar:has(.row.talento-de-perícia){
+  background-color: #00000060;
+}
+.mostrar:has(.row.talento-geral){
+  background-color: #00000060;
+}
+.mostrar:has(.row.talento-de-classe){
+  background-color: #00000060;
+}
+.mostrar:has(.row.habilidade-de-ancestralidade){
+  background-color: #00000060;
+}
+.mostrar:has(.row.habilidade-de-classe){
+  background-color: #00000060;
+}
+.descrição .col:has(.area-descrição){
+  width: 100%;
+}
+.descrição .area-descrição{
+  margin: auto;
+  width: 95%;
+  text-align: left;
+  max-height: 10em;
+  overflow-y: auto;
+  color: #fff;
+}
+.descrição .row:first-child{
+  padding-top: 1em;
+}
+
+/*      AÇÕES       */
+#ações .row:has([value="editar"]){
+  display: flex;
+  justify-content: space-around;
+}
+
+.row[class*="ação"], .row[class*="livre"], .row[class*="reação"]{
+  display: flex;
+  justify-content: space-between;
+  padding: .5em;
+}
+.mostrar:has(.row[class*="ação"]){
+  background-color: #ffffff60;
+}
+.mostrar:has(.row[class*="livre"]){
+  background-color: #ffffff60;
+}
+.mostrar:has(.row[class*="reação"]){
+  background-color: #ffffff60;
+}
+
+#ações .row:has(#adicionar_ação){
+  text-align: center;
+  margin: 1em;
+}
+#ações .row:has([name*="NOME"]){
+  border-top: 2px solid #5A0A00;
+  padding-top: 1em;
+  padding-left: .2em;
+}
+#ações .ação-icon{
+  height: 30px;
+}
+#ações .area-descrição{
+  color: black;
+}
+#ações [name*="NOME"]{
+  margin-right: 1em;
+  text-align: left;
+}
+#ações [name*="PAGINA"]{
+  width: 3em;
+}
+#ações [name*="TRACOS"]{
+  margin-right: 1em;
+  text-align: left;
+}
+#ações .col:has([name*="REQUERIMENTO"]){
+  width: 100%;
+}
+#ações .col:has([name*="ACIONAMENTO"]){
+  width: 100%;
+}
+#ações [name*="REQUERIMENTO"], #ações [name*="ACIONAMENTO"]{
+  height: 1.4em;
+  width: 100%;
+  font-size: 1.2em;
+  text-align: left;
+}
+#ações .requerimentos{
+  text-align: left;
+  margin-left: .8em;
+}
+#ações .acionamento{
+  text-align: left;
+}
+#ações .acionamento .col{
+  width: 100%;
+}
+#ações .acionamento input{
+  width: 99%;
+}
+#ações #adicionar_ação{
+  background-color: #5A0A00;
+  padding: .5em;
+  border-radius: 15px;
+  border-style: ridge;
+  border-color: #ffffff70;
+  cursor: pointer;
+}

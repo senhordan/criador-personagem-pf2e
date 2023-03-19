@@ -1,0 +1,290 @@
+body{
+  font-family: sans-serif;
+  user-select: none;
+  background-color: #EFECE7;
+}
+label{
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.container{
+  border: 4px solid #13265F;
+  width: 470px;
+  margin: auto;
+}
+th, .table_titulo{
+  background-color: #13265F;
+  background: #07153e;
+  background: linear-gradient(0deg, #112352 0%, #152b61 100%);
+/*      #162553*/
+/*      display: inline;*/
+/*      width: 80%;*/
+  color: #fff;
+  padding-top: .1em;
+  padding-bottom: .1em;
+  text-align: center;
+  margin: auto;
+  font-size: 1.8em;
+  font-family: serif;
+  font-weight: bold;
+/*      cursor: pointer;*/
+}
+.subtitulo{
+  background-color: #2D3D6E;
+/*      display: inline;*/
+/*      width: 80%;*/
+  color: #fff;
+  padding-top: .1em;
+  padding-bottom: .1em;
+  text-align: center;
+  margin: auto;
+  font-size: 1em;
+  font-family: serif;
+}
+.linha{
+  border-bottom: 2px solid #6F3325;
+}
+.descrição{
+  font-size: .7em;
+  font-weight: bold;
+}
+.descrição_maior{
+  font-size: 1em;
+  font-weight: bold;
+}
+select{
+  width: 5em;
+  font-size: 1.2em;
+  border-radius: 5px;
+  border-color: #5A0A00;
+  border-style: inset;
+  border-width: 2px;
+  color: #000;
+  text-align: center;
+}
+#atributos, #salvamentos, #CA, #percepção, #pericias, #criação_atributos, #escudo, #armaduras, #CD_classe, #habilidades_talentos, #ações, #ataques{
+  border-collapse: collapse;
+  width: 100%;
+  margin: auto;
+  background-color: #9C5740;
+  color: #fff;
+}
+/*table:not(span>table){
+  border: 4px solid #13265F;
+}*/
+#CA{
+  border-bottom: 0px solid #13265F;
+}
+#armaduras{
+  border-bottom: 0px solid #13265F;
+}
+table:not(#geral) label{
+  text-shadow: 2px 0 #5A0A00, -2px 0 #5A0A00, 0 2px #5A0A00, 0 -2px #5A0A00,
+           1px 1px #5A0A00, -1px -1px #5A0A00, 1px -1px #5A0A00, -1px 1px #5A0A00;
+}
+#armaduras>tbody>tr>td{
+  border: 2px solid #6F3325;
+}
+#geral{
+  border-collapse: collapse;
+  width: 100%;
+  margin: auto;
+}
+#geral td{
+  width: 33.33%;
+}
+#geral input[type='text'], select{
+  width: 90%;
+}
+#geral input[type='number'], select{
+/*  width: 90%;*/
+  border-color: #fff;
+
+}
+#geral select{
+  background-color: #fff;
+  font-size: inherit;
+  border-color: #fff;
+}
+.player_npc{
+  border-collapse: collapse;
+  width: auto;
+  margin: auto;
+  margin-bottom: 1em;
+}
+td{
+/*      border: 1px solid #6F3325;*/
+  text-align: left;
+  padding-top: .4em;
+  text-align: center;
+}
+table#atributos label{
+}
+input[type='number']{
+  width: 2em;
+  font-size: 1.4em;
+  border-radius: 5px;
+  border-color: #5A0A00;
+  border-style: flat;
+  color: #000;
+  text-align: center;
+}
+input[type="checkbox"]{
+  height: 1.5em;
+  width: 1.5em;
+  background-color: red;
+  border-radius: 15px;
+}
+
+input[type='number'][readonly]{
+  cursor: default;
+  background-color: #ffffff50;
+}
+input[type='text']{
+  width: auto;
+  font-size: 1em;
+  border-radius: 5px;
+  border-color: white;
+  border-style: flat;
+  color: #000;
+  text-align: center;
+}
+.proficiencia_radio table{
+  border-collapse: collapse;
+  display: inline;
+}
+.proficiencia_radio table *{
+  padding-top: 0;
+}
+.proficiencia_radio span{
+  font-size: .6em;
+  margin: 0;
+  font-weight: bold;
+}
+.proficiencia_radio [type='radio']{
+  margin: 0;
+}
+#header{
+  grid-column: span 3;
+  text-align: center;
+}
+#grupo_3{
+  grid-row: span 2;
+}
+#grupo_6 {
+grid-column-start: 3;
+/*  grid-column: span 2;*/
+}
+#habilidades_talentos input[type='text'], select{
+  width: 90%;
+}
+[value="remover"]{
+  background-color: #5A0A00;
+  color: white;
+  font-weight: bold;
+  border-radius: 15px;
+  border-color: #ffffff70;
+  margin-bottom: .5em;
+  cursor: pointer;
+
+}
+#habilidades_talentos #adicionar_habilidade {
+  background-color: #5A0A00;
+  padding: .5em;
+  border-radius: 15px;
+  border-style: ridge;
+  border-color: #ffffff70;
+  margin: 1em;
+  cursor: pointer;
+}
+#habilidades_talentos td:has(#adicionar_habilidade) {
+  padding: 1em;
+}
+#ações input[type='text'], select{
+  width: 90%;
+  border-color: white;
+}
+#ações input[type='number']{
+  height: .8em;
+  border-color: white;
+}
+#ações #adicionar_ação {
+  background-color: #5A0A00;
+  padding: .5em;
+  border-radius: 15px;
+  border-style: ridge;
+  border-color: #ffffff70;
+  margin: 1em;
+  cursor: pointer;
+}
+#ações td:has(#adicionar_ação) {
+  padding: 1em;
+}
+
+#criação_atributos th{
+  cursor: pointer;
+}
+textarea{
+  width: 95%;
+  font-size: 1em;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: white;
+  border-style: ridge;
+  color: #000;
+/*  text-align: center;*/
+}
+.row{
+/*  height: fit-content;*/
+}
+.col{
+  display: inline-block;
+}
+#ataques{
+  padding: 0;
+  margin: 0;
+}
+#ataques input[type='text']{
+  width: 6em;
+  border-color: white;
+}
+#ataques select{
+  height: 1.25em;
+  background-color: #fff;
+}
+#ataques input[type='number']{
+  height: .8em;
+  border-color: white;
+}
+#ataques #adicionar_ataques {
+  background-color: #5A0A00;
+  padding: .5em;
+  color: white;
+  text-decoration: none;
+  font-size: 1.3em;
+  font-weight: bold;
+  border-radius: 15px;
+  border-style: ridge;
+  border-color: #ffffff70;
+  margin: 1em;
+  cursor: pointer;
+}
+#ataques td:has(#adicionar_ataques) {
+  padding: 1em;
+}
+.table_titulo{
+  width: 100%;
+}
+.ataque_titulo{
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  padding-left: 0.5em;
+}
+
+.dano_titulo{
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  padding-left: 0.5em;
+}

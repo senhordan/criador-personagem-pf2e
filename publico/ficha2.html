@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ficha</title>
+  <link rel="stylesheet" href="./ficha.css">
+  <style></style>
+</head>
+<body>
+  <form id="ficha">
+    <div class="container">
+      <div id="geral">
+        <div class="row">
+          <div class="col table_titulo">
+            Geral
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="descrição_maior">Nome</span>
+            <input type="text" name="NOME">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" colspan="5">
+            <span class="descrição_maior">Ancestralidade e Herança</span>
+            <input type="text" name="ANCESTRALIDADE_E_HERANCA">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="descrição_maior">Biografia</span>
+            <input type="text" name="BIOGRAFIA" >
+          </div>
+          <div class="col">
+            <span class="descrição_maior">Classe</span>
+            <input type="text" name="CLASSE">
+          </div>
+          <div class="col">
+            <span class="descrição_maior">
+              <abbr title="Ordeiro e Bom | Ordeiro e Neutro    | Ordeiro e Mau&#10;Neutro e Bom  | Neutro Verdadeiro | Neutro e Mau&#10;Caótico e Bom | Caótico e Neutro   | Caótico e Mau">
+                Tendência
+              </abbr>
+            </span>
+            <select name="TENDENCIA">
+              <option value="OB">OB</option>
+              <option value="ON">ON</option>
+              <option value="OM">OM</option>
+              <option value="NB">NB</option>
+              <option value="N">N</option>
+              <option value="NM">NM</option>
+              <option value="CB">CB</option>
+              <option value="CN">CN</option>
+              <option value="CM">CM</option>
+            </select>
+            <!-- <input type="text" name="NOME" style="width: 60%;"> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" colspan="5">
+            <span class="descrição_maior">Divindade</span>
+            <input type="text" name="DIVINDADE">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" colspan="5">
+            <span class="descrição_maior">Idiomas</span>
+            <input type="text" name="IDIOMAS">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="descrição_maior">Nivel</span><br>
+            <input type="number" name="NIVEL" id="NIVEL" value="1" onchange="update_all()">
+          </div>
+          <div class="col">
+            <span class="descrição_maior">HP</span><br>
+            <input type="number" name="HP" id="HP" value="1" onchange="checar_MaxHP()">
+          </div>
+          <div class="col">
+            <span class="descrição_maior">MaxHP</span><br>
+            <input type="number" name="MaxHP" id="MaxHP" value="1" onchange="checar_MaxHP()">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" colspan="5">
+            <span class="descrição_maior">Resistencias/Imunidades:</span><br>
+            <input type="text" name="RESISTENCIAS_IMUNIDADES">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="descrição_maior">Velocidade</span><br>
+            <input type="number" name="VELOCIDADE" step="0.5" style="height: .8em;">
+          </div>
+          <div class="col">
+            <span class="descrição_maior">Tamanho</span><br>
+            <select name="TAMANHO" >
+              <option value="medium">Médio</option>
+              <option value="lowlight">Pequeno</option>
+              <option value="darkvision">Grande</option>
+            </select>
+          </div>
+          <div class="col">
+            <span class="descrição_maior">Visão</span><br>
+            <select name="VISAO" >
+              <option value="normal">Normal</option>
+              <option value="lowlight">Visão na Penumbra</option>
+              <option value="darkvision">Visão Noturna</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col" colspan="5" style="padding: 1em 0;">
+            <input type="radio" name="NPC_PC" value="PC" checked>
+            <label>Player</label>
+            <input type="radio" name="NPC_PC" value="NPC" >
+            <label>NPC</label>
+          </div>
+        </div>
+      </div>
+
+      <table id="geral" class="comum">
+        <th colspan="5">Geral</th>
+        <tr>
+          <td colspan="5">
+            <span class="descrição_maior">Nome</span>
+            <input type="text" name="NOME">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <span class="descrição_maior">Ancestralidade e Herança</span>
+            <input type="text" name="ANCESTRALIDADE_E_HERANCA">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="descrição_maior">Biografia</span>
+            <input type="text" name="BIOGRAFIA" >
+          </td>
+          <td>
+            <span class="descrição_maior">Classe</span>
+            <input type="text" name="CLASSE">
+          </td>
+          <td>
+            <span class="descrição_maior">
+              <abbr title="Ordeiro e Bom | Ordeiro e Neutro    | Ordeiro e Mau&#10;Neutro e Bom  | Neutro Verdadeiro | Neutro e Mau&#10;Caótico e Bom | Caótico e Neutro   | Caótico e Mau">
+                Tendência
+              </abbr>
+            </span>
+            <select name="TENDENCIA">
+              <option value="OB">OB</option>
+              <option value="ON">ON</option>
+              <option value="OM">OM</option>
+              <option value="NB">NB</option>
+              <option value="N">N</option>
+              <option value="NM">NM</option>
+              <option value="CB">CB</option>
+              <option value="CN">CN</option>
+              <option value="CM">CM</option>
+            </select>
+            <!-- <input type="text" name="NOME" style="width: 60%;"> -->
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <span class="descrição_maior">Divindade</span>
+            <input type="text" name="DIVINDADE">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <span class="descrição_maior">Idiomas</span>
+            <input type="text" name="IDIOMAS">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="descrição_maior">Nivel</span><br>
+            <input type="number" name="NIVEL" id="NIVEL" value="1" onchange="update_all()">
+          </td>
+          <td>
+            <span class="descrição_maior">HP</span><br>
+            <input type="number" name="HP" id="HP" value="1" onchange="checar_MaxHP()">
+          </td>
+          <td>
+            <span class="descrição_maior">MaxHP</span><br>
+            <input type="number" name="MaxHP" id="MaxHP" value="1" onchange="checar_MaxHP()">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <span class="descrição_maior">Resistencias/Imunidades:</span><br>
+            <input type="text" name="RESISTENCIAS_IMUNIDADES">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="descrição_maior">Velocidade</span><br>
+            <input type="number" name="VELOCIDADE" step="0.5" style="height: .8em;">
+          </td>
+          <td>
+            <span class="descrição_maior">Tamanho</span><br>
+            <select name="TAMANHO" >
+              <option value="medium">Médio</option>
+              <option value="lowlight">Pequeno</option>
+              <option value="darkvision">Grande</option>
+            </select>
+          </td>
+          <td>
+            <span class="descrição_maior">Visão</span><br>
+            <select name="VISAO" >
+              <option value="normal">Normal</option>
+              <option value="lowlight">Visão na Penumbra</option>
+              <option value="darkvision">Visão Noturna</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="5" style="padding: 1em 0;">
+            <input type="radio" name="NPC_PC" value="PC" checked>
+            <label>Player</label>
+            <input type="radio" name="NPC_PC" value="NPC" >
+            <label>NPC</label>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+
+      <table id="percepção">
+        <th colspan="4">Percepção</th>
+        <tr>
+          <td>
+            <input type="number" name="PERCEPCAO" value="0" readonly><br>
+            <span class="descrição">Valor</span>
+          </td>
+          <td>
+            <input type="number" name="PERCEPCAO_SAB_BONUS" value="0" readonly><br>
+            <span class="descrição">SAB</span>
+          </td>
+          <td>
+            <span class="proficiencia_radio" data-nome="PERCEPCAO_PROFICIENCIA" data-proficiencia="" data-funcao="update_percepção()"></span>
+          </td>
+          <td>
+            <input type="number" name="PERCEPCAO_BONUS_ITEM" value="0" onchange="update_percepção()"><br>
+            <span class="descrição">Item</span>
+          </td>
+        </tr>
+      </table>
+      <table id="salvamentos">
+        <th colspan="4">Jogadas de Salvamentos</th>
+        <tr>
+          <td colspan="4">
+            <label>Fortitude</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number" name="FORTITUDE" value="0" readonly><br>
+            <span class="descrição">Valor</span>
+          </td>
+          <td>
+            <input type="number" name="FORTITUDE_CON_BONUS" value="0" readonly><br>
+            <span class="descrição">CON</span>
+          </td>
+          <td>
+            <span class="proficiencia_radio" data-nome="FORTITUDE_PROFICIENCIA" data-proficiencia="" data-funcao="update_salvamentos()"></span>
+          </td>
+          <td>
+            <input type="number" name="FORTITUDE_BONUS_ITEM" value="0" onchange="update_salvamentos()"><br>
+            <span class="descrição">Item</span>
+          </td>
+        </tr>
+        <tr><td class="linha" colspan='6'></td></tr>
+        <tr>
+          <td colspan="4">
+            <label>Reflexos</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number" name="REFLEXOS" value="0" readonly><br>
+            <span class="descrição">Valor</span>
+          </td>
+          <td>
+            <input type="number" name="REFLEXOS_DES_BONUS" value="0" readonly><br>
+            <span class="descrição">DES</span>
+          </td>
+          <td>
+            <span class="proficiencia_radio" data-nome="REFLEXOS_PROFICIENCIA" data-proficiencia="" data-funcao="update_salvamentos()"></span>
+          </td>
+          <td>
+            <input type="number" name="REFLEXOS_BONUS_ITEM" value="0" onchange="update_salvamentos()"><br>
+            <span class="descrição">Item</span>
+          </td>
+        </tr>
+        <tr><td class="linha" style='' colspan='6'></td></tr>
+        <tr>
+          <td colspan="4">
+            <label>Vontade</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number" name="VONTADE" value="0" readonly><br>
+            <span class="descrição">Valor</span>
+          </td>
+          <td>
+            <input type="number" name="VONTADE_SAB_BONUS" value="0" readonly><br>
+            <span class="descrição">SAB</span>
+          </td>
+          <td>
+            <span class="proficiencia_radio" data-nome="VONTADE_PROFICIENCIA" data-proficiencia="" data-funcao="update_salvamentos()"></span>
+          </td>
+          <td>
+            <input type="number" name="VONTADE_BONUS_ITEM" value="0" onchange="update_salvamentos()"><br>
+            <span class="descrição">Item</span>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>  
+      <table id="CD_classe">
+        <th colspan="4">CD de Classe</th>
+        <tr>
+          <td>
+            <input type="number" name="CD_CLASSE" value="0" readonly><br>
+            <span class="descrição">Valor</span>
+          </td>
+          <td>
+            <select name="CD_CLASSE_ATB_BONUS" onchange="update_CD_classe()">
+              <option value="-">-</option>
+              <option value="FOR">FOR</option>
+              <option value="DES">DES</option>
+              <option value="CON">CON</option>
+              <option value="INT">INT</option>
+              <option value="SAB">SAB</option>
+              <option value="CAR">CAR</option>
+            </select>
+            <br>
+            <span class="descrição">ATB Chave</span>
+          </td>
+          <td>
+            <span class="proficiencia_radio" data-nome="CD_CLASSE_PROFICIENCIA" data-proficiencia="" data-funcao="update_CD_classe()"></span>
+          </td>
+          <td>
+            <input type="number" name="CD_CLASSE_BONUS_ITEM" value="0" onchange="update_CD_classe()"><br>
+            <span class="descrição">Item</span>
+          </td>
+        </tr>
+      </table>
+
+      <table id="criação_atributos">
+        <th class='subtitulo' colspan="6">help</th>
+        <tr>
+          <td colspan="6">
+            <label>Ancestralidade</label><br>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="6"><span class="descrição">aumento</span></td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="FOR"><br>
+            <span class="descrição">FOR</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="DES"><br>
+            <span class="descrição">DES</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="CON"><br>
+            <span class="descrição">CON</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="INT"><br>
+            <span class="descrição">INT</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="SAB"><br>
+            <span class="descrição">SAB</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="CAR"><br>
+            <span class="descrição">CAR</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="6"><span class="descrição">penalidade</span></td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" name="penalidade_atributo" value="FOR"><br>
+            <span class="descrição">FOR</span>
+          </td>
+          <td>
+            <input type="checkbox" name="penalidade_atributo" value="DES"><br>
+            <span class="descrição">DES</span>
+          </td>
+          <td>
+            <input type="checkbox" name="penalidade_atributo" value="CON"><br>
+            <span class="descrição">CON</span>
+          </td>
+          <td>
+            <input type="checkbox" name="penalidade_atributo" value="INT"><br>
+            <span class="descrição">INT</span>
+          </td>
+          <td>
+            <input type="checkbox" name="penalidade_atributo" value="SAB"><br>
+            <span class="descrição">SAB</span>
+          </td>
+          <td>
+            <input type="checkbox" name="penalidade_atributo" value="CAR"><br>
+            <span class="descrição">CAR</span>
+          </td>
+        </tr>
+        <tr><td class="linha" style='' colspan='6'></td></tr>
+        <tr>
+          <td colspan="6">
+            <label>Biografia</label><br>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="6"><span class="descrição">aumento</span></td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="FOR"><br>
+            <span class="descrição">FOR</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="DES"><br>
+            <span class="descrição">DES</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="CON"><br>
+            <span class="descrição">CON</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="INT"><br>
+            <span class="descrição">INT</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="SAB"><br>
+            <span class="descrição">SAB</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="CAR"><br>
+            <span class="descrição">CAR</span>
+          </td>
+        </tr>
+        <tr><td class="linha" style='' colspan='6'></td></tr>
+        <tr>
+          <td colspan="6">
+            <label>Classe</label><br>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="6"><span class="descrição">aumento</span></td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="FOR"><br>
+            <span class="descrição">FOR</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="DES"><br>
+            <span class="descrição">DES</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="CON"><br>
+            <span class="descrição">CON</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="INT"><br>
+            <span class="descrição">INT</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="SAB"><br>
+            <span class="descrição">SAB</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="CAR"><br>
+            <span class="descrição">CAR</span>
+          </td>
+        </tr>
+        <tr><td class="linha" style='' colspan='6'></td></tr>
+        <tr>
+          <td colspan="6">
+            <label>Livre</label><br>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="6"><span class="descrição">aumento</span></td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="FOR"><br>
+            <span class="descrição">FOR</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="DES"><br>
+            <span class="descrição">DES</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="CON"><br>
+            <span class="descrição">CON</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="INT"><br>
+            <span class="descrição">INT</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="SAB"><br>
+            <span class="descrição">SAB</span>
+          </td>
+          <td>
+            <input type="checkbox" name="aumento_atributo" value="CAR"><br>
+            <span class="descrição">CAR</span>
+          </td>
+        </tr>
+      </table>
+      <table id='atributos'></table>
+      <table id='pericias'></table>
+      <table id="CA">
+        <th colspan="5">Classe de Armadura</th>
+        <tr><td></td></tr>
+        <tr>
+          <td>
+            <input type="number" name="CA" value="10" readonly><br>
+            <span class="descrição">Valor</span>
+          </td>
+          <td>
+            <input type="number" name="CA_DES_BONUS" value="0" readonly><br>
+            <span class="descrição">DES</span>
+          </td>
+          <td>
+            <input type="number" name="CA_LIMITE" value="0" onchange="update_CA()"><br>
+            <span class="descrição">LIMITE</span>
+          </td>
+          <td>
+            <span class="proficiencia_radio" data-nome="CA_PROFICIENCIA" data-proficiencia="" data-funcao="update_CA()"></span>
+          </td>
+          <td>
+            <input type="number" name="CA_BONUS_ITEM" value="0" onchange="update_CA()"><br>
+            <span class="descrição">item</span>
+          </td>
+        </tr>
+        <tr><td></td></tr>
+      </table>
+      <table id="armaduras">
+        <tr>
+            <td>
+              <span class="descrição">Sem Armadura</span><br>
+              <span class="proficiencia_radio" data-nome="defesa_sem_armadura" data-proficiencia="" data-funcao=""></span>
+            </td>
+            <td>
+              <span class="descrição">Leve</span><br>
+              <span class="proficiencia_radio" data-nome="armadura_leve" data-proficiencia="" data-funcao=""></span>
+            </td>
+            <td>
+              <span class="descrição">Média</span><br>
+              <span class="proficiencia_radio" data-nome="armadura_media" data-proficiencia="" data-funcao=""></span>
+            </td>
+            <td>
+              <span class="descrição">Pesada</span><br>
+              <span class="proficiencia_radio" data-nome="armadura_pesada" data-proficiencia="" data-funcao=""></span>
+            </td>
+        </tr>
+      </table>
+      <table id="escudo">
+        <th colspan="5" class="subtitulo">escudo</th>
+        <tr>
+          <td>
+            <input type="number" name="escudo" value="0" style="border-radius: 20px;"><br>
+            <span class="descrição">Escudo</span>
+          </td>
+          <td>
+            <input type="number" name="escudo_dureza" value="0"><br>
+            <span class="descrição">Dureza</span>
+          </td>
+          <td>
+            <input type="number" name="escudo_pv_max" value="0" style="border-bottom-right-radius: 0;border-top-right-radius: 0;"><br>
+            <span class="descrição">PV Max</span>
+          </td>
+          <td>
+            <input type="number" name="escudo_limiar" value="0" style="border-bottom-left-radius: 0;border-top-left-radius: 0;"><br>
+            <span class="descrição">LQ</span>
+          </td>
+          <td>
+            <input type="number" name="escudo_pv_atual" value="0"><br>
+            <span class="descrição">PV atuais</span>
+          </td>
+        </tr>
+      </table>
+      <table id="habilidades_talentos">
+        <tr>
+          <th colspan="5">Habilidades e Talentos</th>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <label id="adicionar_habilidade" onclick="adicionar_habilidade()">Adicionar Habilidade/Talento</label>
+          </td>
+        </tr>
+
+      </table>
+
+      <table id="ações">
+        <tr>
+          <th colspan="6">Ações</th>
+        </tr>
+        <tr>
+          <td colspan="6">
+            <label id="adicionar_ação" onclick="adicionar_ação()">Adicionar Ação</label>
+          </td>
+        </tr>
+      </table>
+
+      <div id="ataques">
+        <div class="row">
+          <div class="col table_titulo">
+            Ataques
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <a id="adicionar_ataques" href="ataques.html" target="_blank">Criar Ataques</a>
+          </div>
+        </div>
+        <div class="row" style="display: flex; justify-content: space-around;">
+          <div class="col">
+            <span class="descrição">Nome</span><br>
+            <input type="text">
+          </div>
+          <div class="col">
+            <span class="descrição">Total</span><br>
+            <input type="number" readonly value="0">
+          </div>
+          <div class="col">
+            <span class="descrição">ATB</span><br>
+            <input type="number" readonly value="0">
+          </div>
+          <div class="col">
+            <span class="descrição">ATB</span><br>
+            <select style="width: 3.5em;">
+              <option value="-">-</option>
+              <option value="FOR">FOR</option>
+              <option value="DES">DES</option>
+              <!-- <option value="CON">CON</option> -->
+              <option value="INT">INT</option>
+              <option value="SAB">SAB</option>
+              <option value="CAR">CAR</option>
+            </select>
+          </div>
+          <div class="col">
+            <span class="proficiencia_radio" data-nome="PERCEPCAO_PROFICIENCIA" data-proficiencia="" data-funcao="update_percepção()"></span>
+          </div>
+          <div class="col">
+            <span class="descrição">Item</span><br>
+            <input type="number" value="0">
+          </div>
+        </div>
+        <div class="row"><hr></div>
+        <div class="row" style="display: flex; justify-content: space-around;">
+          <div class="col">
+            <span class="descrição" onclick="adicionar_dano()">Dano +</span>
+          </div>
+        </div>
+        <div class="row" style="display: flex; justify-content: space-around;">
+          <div class="col">
+            <span class="descrição">Quant</span><br>
+            <input type="number" value="0">
+          </div>
+          <div class="col">
+              <span class="descrição">Dado</span><br>
+              <select style="width: 3.15em;">
+                <option value="D4">D4</option>
+                <option value="D6">D6</option>
+                <option value="D8">D8</option>
+                <option value="D10">D10</option>
+                <option value="D12">D12</option>
+              </select>
+          </div>
+          <div class="col">
+              <span class="descrição">ATB</span><br>
+              <select style="width: 3.5em;">
+                <option value="-">-</option>
+                <option value="FOR">FOR</option>
+                <option value="DES">DES</option>
+                <!-- <option value="CON">CON</option> -->
+                <option value="INT">INT</option>
+                <option value="SAB">SAB</option>
+                <option value="CAR">CAR</option>
+              </select>
+          </div>
+          <div class="col">
+              <span class="descrição">Bônus</span><br>
+              <input type="number" value="0">
+          </div>
+          <div class="col">
+              <span class="descrição">Tipo</span><br>
+              <input type="text" style="width: 5em;">
+          </div>
+          <div class="col">
+              <span class="descrição">Traços</span><br>
+              <input type="text">
+          </div>
+          <div class="col">
+              <br>
+              <label class="descrição_maior" onclick="remover_dano()">X</label>
+          </div>
+        </div>
+        <div class="row" style="text-align: center; padding-top: .6em;">
+          <input type="button" value="remover" onclick="remover_habilidade(this)">
+        </div>
+      </div>
+      <input type="submit" style="display: none;">
+    </div>
+  </form>
+  <script type="text/javascript" src="./ficha.js"></script>
+</body>
+</html>
