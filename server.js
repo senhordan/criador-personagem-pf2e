@@ -7,7 +7,6 @@ const path = require('path')
 let ip = require('ip').address()
 const fs = require('fs')
 // const puppeteer = require('puppeteer-core');
-
 app.use(bodyParser.urlencoded({extended: true}))
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'html')
