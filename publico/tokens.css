@@ -1,0 +1,15 @@
+#tokens{
+  /*display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5%;*/
+/*  height: 100vh;*/
+  padding-top: 5%;
+  text-align: center;
+}
+.token-img{
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  margin-bottom: 1em;
+}

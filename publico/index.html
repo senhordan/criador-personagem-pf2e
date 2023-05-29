@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ficha</title>
+  <link rel="stylesheet" href="./publico/usuarios.css">
+  <link rel="stylesheet" href="./publico/ficha.css">
+  <style></style>
+</head>
+<body>
+
+  <div class="popup-overlay" id="popup-overlay"></div>
+  <div class="popup" id="popup"></div>
+  
+  <div id="usuarios">
+    <form class="botoes" method="post">
+      <div class="row">
+        <div class="col">
+          <input type="button" value="+" onclick="adicionar_usuario()" class="botão-usuario">
+        </div>
+      </div>
+    </form>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="./publico/funções.js"></script>
+  <script type="text/javascript" src="./publico/usuarios.js"></script>
+</body>
+</html>
+

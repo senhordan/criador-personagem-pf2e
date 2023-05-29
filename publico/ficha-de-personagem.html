@@ -5,12 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ficha</title>
-  <link rel="stylesheet" href="./publico/ficha.css">
+  <link rel="stylesheet" href="../../publico/ficha.css">
   <style></style>
 </head>
 <body>
-  <form id="ficha">
-    <div class="container">
+<!--     <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="imagem" id="imagemInput">
+    <input type="button" value="Enviar" onclick="enviarImagem()">
+  </form> -->
+
+  <form id="ficha-de-personagem" method="post" enctype="multipart/form-data">
+    <div class="container visualizar">
       <div id="editar_visualizar">
         <div class="row">
           <div class="col table_titulo" onclick="editar_visualizar()">
@@ -24,121 +29,121 @@
             Geral
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <span class="texto-maior">Nome</span><br>
-            <input type="text" name="NOME">
+        <div class="modo-edição">
+    <!--       <div class="row">
+            <div class="col">
+              <label for="token_image">teste</label>
+              <input type="file" id="token_image" oninput="enviar_imagem()">
+            </div>
+          </div> -->
+          <div class="row" style="display: none;">
+            <div class="col">
+              <span class="texto-maior">Nome</span><br>
+              <input type="text" name="NOME" onfocusout="update_nome()">
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <span class="texto-maior">Ancestralidade e Herança</span><br>
-            <input type="text" name="ANCESTRALIDADE_E_HERANCA">
+          <div class="row">
+            <div class="col">
+              <span class="texto-maior">Ancestralidade e Herança</span><br>
+              <input type="text" name="ANCESTRALIDADE_E_HERANCA">
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <span class="texto-maior">Biografia</span><br>
-            <input type="text" name="BIOGRAFIA" >
+          <div class="row">
+            <div class="col">
+              <span class="texto-maior">Biografia</span><br>
+              <input type="text" name="BIOGRAFIA" >
+            </div>
+            <div class="col">
+              <span class="texto-maior">Classe</span><br>
+              <input type="text" name="CLASSE">
+            </div>
+            <div class="col">
+              <span class="texto-maior">Divindade</span><br>
+              <input type="text" name="DIVINDADE">
+            </div>
           </div>
-          <div class="col">
-            <span class="texto-maior">Classe</span><br>
-            <input type="text" name="CLASSE">
+          <!-- <div class="row" id="tendência" style="display: none;">
+            <table>
+              <tr>
+                <td data-tendencia="OB" style="background-color: #13265F;"><span>Ordeiro e Bom</span></td>
+                <td data-tendencia="ON"><span>Ordeiro e Neutro</span></td>
+                <td data-tendencia="OM"><span>Ordeiro e Mau</span></td>
+              </tr>
+              <tr>
+                <td data-tendencia="NB"><span>Neutro e Bom </span></td>
+                <td data-tendencia="N"><span>Neutro Verdadeiro</span></td>
+                <td data-tendencia="NM"><span>Neutro e Mau</span></td>
+              </tr>
+              <tr>
+                <td data-tendencia="CB"><span>Caótico e Bom</span></td>
+                <td data-tendencia="CN"><span>Caótico e Neutro</span></td>
+                <td data-tendencia="CM"><span>Caótico e Mau</span></td>
+              </tr>
+            </table>
+          </div> -->
+          <div class="row">
+            <div class="col">
+              <span class="texto-maior">Idiomas</span><br>
+              <input type="text" name="IDIOMAS">
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <span class="texto-maior">
-                Tendência
-              </abbr>
-            </span><br>
-            <input type="button" name="TENDENCIA" value="OB"  onclick="toggle_tendencia()">
-            <input type="text" name="TENDENCIA" value="OB">
-            <!-- <input type="text" name="NOME"> -->
+          <div class="row">
+            <div class="col">
+              <span class="texto-maior">Sentidos</span><br>
+              <input type="text" name="SENTIDOS">
+            </div>
           </div>
-          <div class="col">
-            <span class="texto-maior">Divindade</span><br>
-            <input type="text" name="DIVINDADE">
+          <div class="row">
+            <div class="col">
+              <span class="texto-maior">Resistencias/Imunidades</span><br>
+              <input type="text" name="RESISTENCIAS_IMUNIDADES">
+            </div>
           </div>
-        </div>
-        <div class="row" id="tendência" style="display: none;">
-          <table>
-            <tr>
-              <td data-tendencia="OB" style="background-color: #13265F;"><span>Ordeiro e Bom</span></td>
-              <td data-tendencia="ON"><span>Ordeiro e Neutro</span></td>
-              <td data-tendencia="OM"><span>Ordeiro e Mau</span></td>
-            </tr>
-            <tr>
-              <td data-tendencia="NB"><span>Neutro e Bom </span></td>
-              <td data-tendencia="N"><span>Neutro Verdadeiro</span></td>
-              <td data-tendencia="NM"><span>Neutro e Mau</span></td>
-            </tr>
-            <tr>
-              <td data-tendencia="CB"><span>Caótico e Bom</span></td>
-              <td data-tendencia="CN"><span>Caótico e Neutro</span></td>
-              <td data-tendencia="CM"><span>Caótico e Mau</span></td>
-            </tr>
-          </table>
-        </div>
-        <div class="row">
-          <div class="col">
-            <span class="texto-maior">Idiomas</span><br>
-            <input type="text" name="IDIOMAS">
+          <div class="row">
+            <div class="col">
+              <span class="texto-maior">Traços</span><br>
+              <input type="text" name="TRACOS" placeholder="humanoide...">
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <span class="texto-maior">Nivel</span><br>
-            <input type="number" name="NIVEL" id="NIVEL" value="1" onchange="update_all()">
+          <div class="row">
+            <div class="col">
+              <span class="texto-maior">Nivel</span><br>
+              <input type="number" name="NIVEL" id="NIVEL" min="0" value="1" onchange="update_all()">
+            </div>
+            <div class="col">
+              <span class="texto-maior">MaxHP</span><br>
+              <input type="number" name="MaxHP" id="MaxHP" value="1" onchange="checar_MaxHP()">
+            </div>
+            <div class="col">
+              <span class="texto-maior">HP</span><br>
+              <input type="number" name="HP" id="HP" value="1" onchange="checar_MaxHP()">
+            </div>
           </div>
-          <div class="col">
-            <span class="texto-maior">HP</span><br>
-            <input type="number" name="HP" id="HP" value="1" onchange="checar_MaxHP()">
+          <div class="row">
+            <div class="col">
+              <span class="texto-maior">Velocidade</span><br>
+              <input type="number" name="VELOCIDADE" step="0.5">
+            </div>
+            <div class="col">
+              <span class="texto-maior">Tamanho</span><br>
+              <select name="TAMANHO" >
+                <option value="medium">Médio</option>
+                <option value="lowlight">Pequeno</option>
+                <option value="darkvision">Grande</option>
+              </select>
+            </div>
+            <div class="col">
+              <span class="texto-maior">Visão</span><br>
+              <select name="VISAO" >
+                <option value="normal">Normal</option>
+                <option value="lowlight">Visão na Penumbra</option>
+                <option value="darkvision">Visão Noturna</option>
+              </select>
+            </div>
           </div>
-          <div class="col">
-            <span class="texto-maior">MaxHP</span><br>
-            <input type="number" name="MaxHP" id="MaxHP" value="1" onchange="checar_MaxHP()">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <span class="texto-maior">Resistencias/Imunidades:</span><br>
-            <input type="text" name="RESISTENCIAS_IMUNIDADES">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <span class="texto-maior">Velocidade</span><br>
-            <input type="number" name="VELOCIDADE" step="0.5">
-          </div>
-          <div class="col">
-            <span class="texto-maior">Tamanho</span><br>
-            <select name="TAMANHO" >
-              <option value="medium">Médio</option>
-              <option value="lowlight">Pequeno</option>
-              <option value="darkvision">Grande</option>
-            </select>
-          </div>
-          <div class="col">
-            <span class="texto-maior">Visão</span><br>
-            <select name="VISAO" >
-              <option value="normal">Normal</option>
-              <option value="lowlight">Visão na Penumbra</option>
-              <option value="darkvision">Visão Noturna</option>
-            </select>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col">
-            <input type="radio" name="NPC_PC" value="PC" checked>
-            <span class="texto-maior">Player</span>
-            <input type="radio" name="NPC_PC" value="NPC" >
-            <span class="texto-maior">NPC</span>
-          </div>
-        </div>
+        </div>    
       </div>
-
       <div id="percepção">
         <div class="col table_titulo">Percepção</div>
         <div class="row">
@@ -524,99 +529,33 @@
         </div>
         <div class="row">
           <div class="col">
-            <a id="adicionar_ataques" href="ataques.html" target="_blank">Criar Ataques</a>
+            <label id="adicionar_ataque" onclick="adicionar_ataque()">Adicionar Ataque</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="inventario">
+        <div class="row">
+          <div class="col table_titulo">
+            Inventario
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <span class="texto-maior">Nome</span><br>
-            <input type="text">
-          </div>
-          <div class="col">
-            <span class="texto-maior">Total</span><br>
-            <input type="number" readonly value="0">
-          </div>
-          <div class="col">
-            <span class="texto-maior">ATB</span><br>
-            <input type="number" readonly value="0">
-          </div>
-          <div class="col">
-            <span class="texto-maior">ATB</span><br>
-            <select>
-              <option value="-">-</option>
-              <option value="FOR">FOR</option>
-              <option value="DES">DES</option>
-              <!-- <option value="CON">CON</option> -->
-              <option value="INT">INT</option>
-              <option value="SAB">SAB</option>
-              <option value="CAR">CAR</option>
-            </select>
-          </div>
-          <div class="col">
-            <span class="proficiencia_radio" data-nome="aaaPROFICIENCIA" data-proficiencia="" data-funcao="update_percepção()"></span>
-          </div>
-          <div class="col">
-            <span class="texto-maior">Item</span><br>
-            <input type="number" value="0">
+            <label id="adicionar_item" onclick="adicionar_item()">Adicionar item</label>
           </div>
         </div>
-        <div class="row"><hr></div>
-        <div class="row">
-          <div class="col">
-            <span class="texto-maior" onclick="adicionar_dano()">Dano +</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <span class="texto-maior">Quant</span><br>
-            <input type="number" value="0">
-          </div>
-          <div class="col">
-              <span class="texto-maior">Dado</span><br>
-              <select>
-                <option value="D4">D4</option>
-                <option value="D6">D6</option>
-                <option value="D8">D8</option>
-                <option value="D10">D10</option>
-                <option value="D12">D12</option>
-              </select>
-          </div>
-          <div class="col">
-              <span class="texto-maior">ATB</span><br>
-              <select>
-                <option value="-">-</option>
-                <option value="FOR">FOR</option>
-                <option value="DES">DES</option>
-                <!-- <option value="CON">CON</option> -->
-                <option value="INT">INT</option>
-                <option value="SAB">SAB</option>
-                <option value="CAR">CAR</option>
-              </select>
-          </div>
-          <div class="col">
-              <span class="texto-maior">Bônus</span><br>
-              <input type="number" value="0">
-          </div>
-          <div class="col">
-              <span class="texto-maior">Tipo</span><br>
-              <input type="text">
-          </div>
-          <div class="col">
-              <span class="texto-maior">Traços</span><br>
-              <input type="text">
-          </div>
-          <div class="col">
-              <br>
-              <label class="texto-maior" onclick="remover_dano()">X</label>
-          </div>
-        </div>
-        <div class="row">
-          <input type="button" value="remover" onclick="remover_habilidade(this)">
-        </div>
+
+
+
       </div>
       <input type="submit">
     </div>
   </form>
-  <script type="text/javascript" src="./publico/ficha.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="../../publico/funções.js"></script>
+  <script type="text/javascript" src="../../publico/ficha-de-personagem.js"></script>
+  <script type="text/javascript" src="../../publico/inventario.js"></script>
 </body>
 </html>
+

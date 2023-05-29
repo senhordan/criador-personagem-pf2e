@@ -7,52 +7,6 @@ body{
   user-select: none;
   background-color: #EFECE7;
 }
-
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-  display: none;
-  backdrop-filter: blur(2px);
-}
-
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  z-index: 10000;
-  display: none;
-  border-radius: 5px;
-}
-
-.popup h2 {
-  margin-top: 0;
-}
-
-.popup p {
-  margin-bottom: 20px;
-}
-
-.popup button {
-  padding: 10px 20px;
-  margin: .5em .2em;
-}
-
-.popup-overlay.active,
-.popup.active {
-  display: block;
-}
-
 .container{
   border: 4px solid #13265F;
   width: 470px;
@@ -96,7 +50,7 @@ body{
 }
 
 
-#ficha-de-personagem .row:not(:first-child){
+.row:not(:first-child){
   padding: .3em;
 }
 .col{
@@ -160,7 +114,7 @@ input{
   color: #000;
   text-align: center;
 }
-#criação_atributos input[type="checkbox"]{
+input[type="checkbox"]{
   height: 1.5em;
   width: 1.5em;
   background-color: red;
@@ -195,9 +149,6 @@ label{
 
 #geral {
   text-align: center;
-}
-#token_image{
-  display: none;
 }
 [name="TENDENCIA"]{
   user-select: none;
@@ -452,23 +403,20 @@ textarea{
 .mostrar:has(.row.talento-de-ancestralidade){
   background-color: #00000060;
 }
-
-/*ARRUMAR ACIONAMENTO*/
-
 .mostrar:has(.row.talento-de-perícia){
-  background-color: #00000042;
+  background-color: #00000060;
 }
 .mostrar:has(.row.talento-geral){
-  background-color: #00000042;
+  background-color: #00000060;
 }
 .mostrar:has(.row.talento-de-classe){
-  background-color: #00000080;
+  background-color: #00000060;
 }
 .mostrar:has(.row.habilidade-de-ancestralidade){
   background-color: #00000060;
 }
 .mostrar:has(.row.habilidade-de-classe){
-  background-color: #00000080;
+  background-color: #00000060;
 }
 .descrição .col:has(.area-descrição){
   width: 100%;
@@ -550,7 +498,6 @@ textarea{
 }
 #ações .acionamento{
   text-align: left;
-  margin-left: 0.8em;
 }
 #ações .acionamento .col{
   width: 100%;
@@ -674,75 +621,4 @@ textarea{
 .tab{
   text-indent: 1em;
 }
-.row[class*="ataque"]{
-  display: flex;
-  justify-content: space-between;
-  padding: .5em;
-}
-.mostrar:has(.row[class*="ataque"]){
-  background-color: #ffffff60;
-}
 
-/* INVENTARIO */
-
-
-#inventario #adicionar_item{
-  background-color: #5A0A00;
-  padding: .5em;
-  border-radius: 15px;
-  border-style: ridge;
-  border-color: #ffffff70;
-  cursor: pointer;
-}
-
-#inventario .row:has(#adicionar_item){
-  text-align: center;
-  margin: 1em;
-}
-#inventario [name*="_VOLUME"]{
-  width: 2em;
-}
-#inventario [name*="_NOME"]{
-  margin-left: .2em;
-  width: 9.5em;
-}
-#inventario .editar{
-  border-top: 2px solid #5A0A00;
-  padding: 1em 0;
-
-}
-#inventario .col:has(.item-nome){
-  vertical-align: middle;
-}
-#inventario .row:has(.item-nome){
-  padding: .3em .5em 0 .5em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-#inventario .row:has([value="editar"]){
-  display: flex;
-  justify-content: space-around;
-}
-#inventario .mostrar{
-  background-color: #ffffff60;
-}
-#inventario .area-descrição{
-  color: #000;
-}
-.volume{
-  margin-left: 1em;
-  margin-right: 1em;
-}
-.PC{
-  color: #C85230;
-}
-.PP{
-  color: silver;
-}
-.PO{
-  color: gold;
-}
-.PL{
-  color: #726b67;
-}
