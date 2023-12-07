@@ -1,11 +1,11 @@
 const socket = io();
-const usuario = window.location.href.replace(/http.*:\d{4}.*usuario\//, '')
-
+const usuario = window.location.href.replace(/.*usuario\//, '')
 const popup = query('#popup')
 const popup_overlay = query('#popup-overlay')
 
 const enviar_imagem = (token)=>{
-  var arquivo = document.getElementById("token_image").files[0];
+  if (!confirm('Deseja alterar a imagem do token?\n*Essa ação não poderá ser desfeita')) {return}
+  var arquivo = document.querySelector(`[type="file"`).files[0];
   var formData = new FormData();
   formData.append("imagem", arquivo);
 
@@ -17,7 +17,11 @@ const enviar_imagem = (token)=>{
     }
   };
   xhr.send(formData);
+  fechar_popup()
+  location.reload()
 }
+
+
 
 const abrir_token = (token)=>{
   console.log(`abrir ${token}`)  
@@ -61,23 +65,25 @@ const editar_token = (token_nome)=>{
 }
 
 const editar_nome = (token_nome)=>{
-  const token = query(`[data-token="${token_nome}"]`)
-  const div = token.closest('.row')
-  const token_nome_elemento = div.querySelector('.token-nome')
+  const div = query(`[data-token="${token_nome}"]`)
+  const label = div.querySelector('label')
+  const img = div.querySelector('img')
+  const ancora = div.querySelector('a')
 
-  // console.log([token, div, token_nome_elemento])
   const resposta = confirm('Deseja editar o nome do Token?')
   if (!resposta) {return}
   const novo_nome = nome_de_token()
   if (!novo_nome) {return}
-  token_nome_elemento.innerText = novo_nome
-  token.dataset.token = novo_nome
-  token.src = token.src.replace(token_nome, novo_nome)
+
+  div.dataset.token = novo_nome
+  label.innerText = novo_nome
+  img.src = img.src.replace(token_nome, novo_nome)
+  ancora.href = ancora.href.replace(token_nome, novo_nome)
   socket.emit('editar token nome', [usuario, token_nome, novo_nome])
   fechar_popup()
 }
 const editar_imagem = (token_nome)=>{
-
+  popup_imagem(token_nome)
 }
 
 const nome_de_token = (nome)=>{
@@ -96,17 +102,15 @@ const nome_de_token = (nome)=>{
 
 const adicionar_token = (token_nome)=>{
   if (!token_nome) {
-
     token_nome = criar_token()
-
   }
   const div_tokens = query('#tokens')
   const div = document.createElement('div')
   div.className = 'row'
   div.innerHTML = `
-    <div class="col">
-      <label class="token-nome">${token_nome}</label><br>
-      <img class="token-img" data-token="${token_nome}" src="../publico/img/${token_nome}.png" onclick="abrir_popup(this)" onerror="trocar_imagem(this)">
+    <div class="col" data-token="${token_nome}">
+      <label onclick="abrir_popup(this)">${token_nome}</label><br>
+      <a href="/usuario/${usuario}/${token_nome}"><img class="token-img" src="../publico/img/${token_nome}.png" onerror="trocar_imagem(this)"></a>
     </div>
   `
 
@@ -122,13 +126,15 @@ socket.once('retorno tokens', tokens_array=>{
 })
 
 const abrir_popup = (elemento)=>{
-  const token_nome = elemento.dataset.token
+  const div = elemento.closest('.col')
+  const token_nome = div.dataset.token
+
   let botão_remover = `<button onclick="remover_token('${token_nome}')">Remover Token</button>`
+
   if (token_nome == 'undefined') {botão_remover = ''}
   popup.innerHTML = `
     <h2>${token_nome}</h2>
     <button onclick="editar_token('${token_nome}')">Editar Token</button>
-    <button onclick="abrir_token('${token_nome}')">Abrir Token</button><br>
     ${botão_remover}
     <button onclick="fechar_popup()">Fechar</button>
 `
@@ -138,6 +144,7 @@ const abrir_popup = (elemento)=>{
 }
 
 const popup_editar = (elemento)=>{
+  // console.log(elemento)
   const token_nome = elemento.dataset.token
 
   popup.innerHTML = `
@@ -145,6 +152,22 @@ const popup_editar = (elemento)=>{
     <button onclick="editar_nome('${token_nome}')">Editar Nome</button>
     <button onclick="editar_imagem('${token_nome}')">Editar Imagem</button><br>
     <button onclick="fechar_popup()">Fechar</button>
+`
+
+  popup_overlay.classList.add('active');
+  popup.classList.add('active');
+}
+
+const popup_imagem = (token_nome)=>{
+  const token = query(`[data-token="${token_nome}"]`)
+
+  popup.innerHTML = `
+    <h2>${token_nome}</h2>
+    <form method="post" enctype="multipart/form-data">
+      <input type="file">
+      <input type="button" value="Enviar" onclick="enviar_imagem('${token_nome}')"></input>
+      <input type="button" value="Fechar" onclick="fechar_popup()"></input>
+    </form>
 `
 
   popup_overlay.classList.add('active');

@@ -6,23 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ficha</title>
   <link rel="stylesheet" href="../../publico/ficha.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
   <style></style>
 </head>
 <body>
 <!--     <form id="uploadForm" enctype="multipart/form-data">
     <input type="file" name="imagem" id="imagemInput">
-    <input type="button" value="Enviar" onclick="enviarImagem()">
+    <input type="button" value="enviar" onclick="enviarImagem()">
   </form> -->
 
-  <form id="ficha-de-personagem" method="post" enctype="multipart/form-data">
-    <div class="container visualizar">
+  <div id="ficha-de-personagem"> 
+     <!-- method="post" enctype="multipart/form-data" -->
+    <div class="container">
       <div id="editar_visualizar">
         <div class="row">
-          <div class="col table_titulo" onclick="editar_visualizar()">
+          <div class="col table_titulo visualizar" onclick="editar_visualizar()">
             Editar
           </div>
         </div>
       </div>
+    </div>
+    <div class="container editar" style="display: none;">
       <div id="geral">
         <div class="row">
           <div class="col table_titulo">
@@ -36,30 +42,30 @@
               <input type="file" id="token_image" oninput="enviar_imagem()">
             </div>
           </div> -->
-          <div class="row" style="display: none;">
+          <div class="row">
             <div class="col">
               <span class="texto-maior">Nome</span><br>
-              <input type="text" name="NOME" onfocusout="update_nome()">
+              <input type="text" name="nome">
             </div>
           </div>
           <div class="row">
             <div class="col">
               <span class="texto-maior">Ancestralidade e Herança</span><br>
-              <input type="text" name="ANCESTRALIDADE_E_HERANCA">
+              <input type="text" name="ancestralidade_e_heranca">
             </div>
           </div>
           <div class="row">
             <div class="col">
               <span class="texto-maior">Biografia</span><br>
-              <input type="text" name="BIOGRAFIA" >
+              <input type="text" name="biografia" >
             </div>
             <div class="col">
               <span class="texto-maior">Classe</span><br>
-              <input type="text" name="CLASSE">
+              <input type="text" name="classe">
             </div>
             <div class="col">
               <span class="texto-maior">Divindade</span><br>
-              <input type="text" name="DIVINDADE">
+              <input type="text" name="divindade">
             </div>
           </div>
           <!-- <div class="row" id="tendência" style="display: none;">
@@ -84,57 +90,57 @@
           <div class="row">
             <div class="col">
               <span class="texto-maior">Idiomas</span><br>
-              <input type="text" name="IDIOMAS">
+              <input type="text" name="idiomas">
             </div>
           </div>
           <div class="row">
             <div class="col">
               <span class="texto-maior">Sentidos</span><br>
-              <input type="text" name="SENTIDOS">
+              <input type="text" name="sentidos">
             </div>
           </div>
           <div class="row">
             <div class="col">
               <span class="texto-maior">Resistencias/Imunidades</span><br>
-              <input type="text" name="RESISTENCIAS_IMUNIDADES">
+              <input type="text" name="resistencias_imunidades">
             </div>
           </div>
           <div class="row">
             <div class="col">
               <span class="texto-maior">Traços</span><br>
-              <input type="text" name="TRACOS" placeholder="humanoide...">
+              <input type="text" name="tracos" placeholder="humanoide...">
             </div>
           </div>
           <div class="row">
             <div class="col">
               <span class="texto-maior">Nivel</span><br>
-              <input type="number" name="NIVEL" id="NIVEL" min="0" value="1" onchange="update_all()">
+              <input type="number" name="nivel" id="NIVEL" min="0" value="1">
             </div>
             <div class="col">
               <span class="texto-maior">MaxHP</span><br>
-              <input type="number" name="MaxHP" id="MaxHP" value="1" onchange="checar_MaxHP()">
+              <input type="number" name="maxhp" id="MaxHP" value="1">
             </div>
             <div class="col">
               <span class="texto-maior">HP</span><br>
-              <input type="number" name="HP" id="HP" value="1" onchange="checar_MaxHP()">
+              <input type="number" name="hp" id="HP" value="1">
             </div>
           </div>
           <div class="row">
             <div class="col">
               <span class="texto-maior">Velocidade</span><br>
-              <input type="number" name="VELOCIDADE" step="0.5">
+              <input type="number" name="velocidade" step="0.5">
             </div>
             <div class="col">
               <span class="texto-maior">Tamanho</span><br>
-              <select name="TAMANHO" >
-                <option value="medium">Médio</option>
-                <option value="lowlight">Pequeno</option>
-                <option value="darkvision">Grande</option>
+              <select name="tamanho" >
+                <option value="medio">Médio</option>
+                <option value="pequeno">Pequeno</option>
+                <option value="grande">Grande</option>
               </select>
             </div>
             <div class="col">
               <span class="texto-maior">Visão</span><br>
-              <select name="VISAO" >
+              <select name="visao" >
                 <option value="normal">Normal</option>
                 <option value="lowlight">Visão na Penumbra</option>
                 <option value="darkvision">Visão Noturna</option>
@@ -148,83 +154,83 @@
         <div class="col table_titulo">Percepção</div>
         <div class="row">
           <div class="col">
-            <input type="number" name="PERCEPCAO" value="0" readonly><br>
+            <input type="number" name="valor" value="0" readonly><br>
             <span class="texto-menor">Valor</span>
           </div>
           <div class="col">
-            <input type="number" name="PERCEPCAO_SAB_BONUS" value="0" readonly><br>
+            <input type="number" name="bonus_de_atributo" value="0" readonly><br>
             <span class="texto-menor">SAB</span>
           </div>
           <div class="col">
-            <span class="proficiencia_radio" data-nome="PERCEPCAO_PROFICIENCIA" data-proficiencia="" data-funcao="update_percepção()"></span>
+            <span class="proficiencia_radio" data-funcao="update_all()"></span>
           </div>
           <div class="col">
-            <input type="number" name="PERCEPCAO_BONUS_ITEM" value="0" onchange="update_percepção()"><br>
+            <input type="number" name="bonus_de_item" value="0" onchange="update_all()"><br>
             <span class="texto-menor">Item</span>
           </div>
         </div>
       </div>
       <div id="salvamentos">
         <div class="col table_titulo">Jogadas de Salvamentos</div>
-        <div class="row">
+        <div class="row fortitude">
           <div class="col">
             <label>Fortitude</label>
           </div>
 
           <div class="col">
-            <input type="number" name="FORTITUDE" value="0" readonly><br>
+            <input type="number" name="valor" value="0" readonly><br>
             <span class="texto-menor">Valor</span>
           </div>
           <div class="col">
-            <input type="number" name="FORTITUDE_CON_BONUS" value="0" readonly><br>
+            <input type="number" data-atributo="con" name="bonus_de_atributo" value="0" readonly><br>
             <span class="texto-menor">CON</span>
           </div>
           <div class="col">
-            <span class="proficiencia_radio" data-nome="FORTITUDE_PROFICIENCIA" data-proficiencia="" data-funcao="update_salvamentos()"></span>
+            <span class="proficiencia_radio" data-funcao="update_all()"></span>
           </div>
           <div class="col">
-            <input type="number" name="FORTITUDE_BONUS_ITEM" value="0" onchange="update_salvamentos()"><br>
+            <input type="number" name="bonus_de_item" value="0" onchange="update_all()"><br>
             <span class="texto-menor">Item</span>
           </div>
         </div>
-        <div class="row">
+        <div class="row reflexos">
           <div class="col">
             <label>Reflexos</label>
           </div>
 
           <div class="col">
-            <input type="number" name="REFLEXOS" value="0" readonly><br>
+            <input type="number" name="valor" value="0" readonly><br>
             <span class="texto-menor">Valor</span>
           </div>
           <div class="col">
-            <input type="number" name="REFLEXOS_DES_BONUS" value="0" readonly><br>
+            <input type="number" data-atributo="des" name="bonus_de_atributo" value="0" readonly><br>
             <span class="texto-menor">DES</span>
           </div>
           <div class="col">
-            <span class="proficiencia_radio" data-nome="REFLEXOS_PROFICIENCIA" data-proficiencia="" data-funcao="update_salvamentos()"></span>
+            <span class="proficiencia_radio" data-funcao="update_all()"></span>
           </div>
           <div class="col">
-            <input type="number" name="REFLEXOS_BONUS_ITEM" value="0" onchange="update_salvamentos()"><br>
+            <input type="number" name="bonus_de_item" value="0" onchange="update_all()"><br>
             <span class="texto-menor">Item</span>
           </div>
         </div>
-        <div class="row">
+        <div class="row vontade">
           <div class="col">
             <label>Vontade</label>
           </div>
           <div class="col">
-            <input type="number" name="VONTADE" value="0" readonly><br>
+            <input type="number" name="valor" value="0" readonly><br>
             <span class="texto-menor">Valor</span>
           </div>
           <div class="col">
-            <input type="number" name="VONTADE_SAB_BONUS" value="0" readonly><br>
+            <input type="number" data-atributo="sab" name="bonus_de_atributo" value="0" readonly><br>
             <span class="texto-menor">SAB</span>
           </div>
           <div class="col">
-            <span class="proficiencia_radio" data-nome="VONTADE_PROFICIENCIA" data-proficiencia="" data-funcao="update_salvamentos()"></span>
+            <span class="proficiencia_radio" data-funcao="update_all()"></span>
           </div>
           <div class="col">
-            <input type="number" name="VONTADE_BONUS_ITEM" value="0" onchange="update_salvamentos()"><br>
+            <input type="number" name="bonus_de_item" value="0" onchange="update_all()"><br>
             <span class="texto-menor">Item</span>
           </div>
         </div>
@@ -233,197 +239,28 @@
         <div class="col table_titulo">CD de Classe</div>
         <div class="row">
           <div class="col">
-            <input type="number" name="CD_CLASSE" value="0" readonly><br>
+            <input type="number" name="valor" value="0" readonly><br>
             <span class="texto-menor">Valor</span>
           </div>
           <div class="col">
-            <select name="CD_CLASSE_ATB_BONUS" onchange="update_CD_classe()">
+            <select name="atributo_chave" onchange="update_all()">
               <option value="-">-</option>
-              <option value="FOR">FOR</option>
-              <option value="DES">DES</option>
-              <option value="CON">CON</option>
-              <option value="INT">INT</option>
-              <option value="SAB">SAB</option>
-              <option value="CAR">CAR</option>
+              <option value="for">FOR</option>
+              <option value="des">DES</option>
+              <option value="con">CON</option>
+              <option value="int">INT</option>
+              <option value="sab">SAB</option>
+              <option value="car">CAR</option>
             </select>
             <br>
             <span class="texto-menor">ATB Chave</span>
           </div>
           <div class="col">
-            <span class="proficiencia_radio" data-nome="CD_CLASSE_PROFICIENCIA" data-proficiencia="" data-funcao="update_CD_classe()"></span>
+            <span class="proficiencia_radio" data-funcao="update_all()"></span>
           </div>
           <div class="col">
-            <input type="number" name="CD_CLASSE_BONUS_ITEM" value="0" onchange="update_CD_classe()"><br>
+            <input type="number" name="bonus_de_item" value="0" onchange="update_all()"><br>
             <span class="texto-menor">Item</span>
-          </div>
-        </div>
-      </div>
-
-      <div id="criação_atributos">
-        <div class="col subtitulo" class=''>help</div>
-        <div class="row">
-          <div class="col">
-            <label>Ancestralidade</label><br>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col"><span class="texto-menor aumento">aumento</span></div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="FOR"><br>
-            <span class="texto-menor">FOR</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="DES"><br>
-            <span class="texto-menor">DES</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="CON"><br>
-            <span class="texto-menor">CON</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="INT"><br>
-            <span class="texto-menor">INT</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="SAB"><br>
-            <span class="texto-menor">SAB</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="CAR"><br>
-            <span class="texto-menor">CAR</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col"><span class="texto-menor penalidade">penalidade</span></div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <input type="checkbox" name="penalidade_atributo" value="FOR"><br>
-            <span class="texto-menor">FOR</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="penalidade_atributo" value="DES"><br>
-            <span class="texto-menor">DES</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="penalidade_atributo" value="CON"><br>
-            <span class="texto-menor">CON</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="penalidade_atributo" value="INT"><br>
-            <span class="texto-menor">INT</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="penalidade_atributo" value="SAB"><br>
-            <span class="texto-menor">SAB</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="penalidade_atributo" value="CAR"><br>
-            <span class="texto-menor">CAR</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label>Biografia</label><br>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col"><span class="texto-menor aumento">aumento</span></div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="FOR"><br>
-            <span class="texto-menor">FOR</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="DES"><br>
-            <span class="texto-menor">DES</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="CON"><br>
-            <span class="texto-menor">CON</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="INT"><br>
-            <span class="texto-menor">INT</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="SAB"><br>
-            <span class="texto-menor">SAB</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="CAR"><br>
-            <span class="texto-menor">CAR</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label>Classe</label><br>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col"><span class="texto-menor aumento">aumento</span></div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="FOR"><br>
-            <span class="texto-menor">FOR</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="DES"><br>
-            <span class="texto-menor">DES</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="CON"><br>
-            <span class="texto-menor">CON</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="INT"><br>
-            <span class="texto-menor">INT</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="SAB"><br>
-            <span class="texto-menor">SAB</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="CAR"><br>
-            <span class="texto-menor">CAR</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label>Livre</label><br>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col"><span class="texto-menor aumento">aumento</span></div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="FOR"><br>
-            <span class="texto-menor">FOR</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="DES"><br>
-            <span class="texto-menor">DES</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="CON"><br>
-            <span class="texto-menor">CON</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="INT"><br>
-            <span class="texto-menor">INT</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="SAB"><br>
-            <span class="texto-menor">SAB</span>
-          </div>
-          <div class="col">
-            <input type="checkbox" name="aumento_atributo" value="CAR"><br>
-            <span class="texto-menor">CAR</span>
           </div>
         </div>
       </div>
@@ -433,43 +270,43 @@
         <div class="col table_titulo">Classe de Armadura</div>
         <div class="row">
           <div class="col">
-            <input type="number" name="CA" value="10" readonly><br>
+            <input type="number" name="valor" value="10" readonly><br>
             <span class="texto-menor">Valor</span>
           </div>
           <div class="col">
-            <input type="number" name="CA_DES_BONUS" value="0" readonly><br>
+            <input type="number" data-atributo="des" name="bonus_de_atributo" value="0" readonly><br>
             <span class="texto-menor">DES</span>
           </div>
           <div class="col">
-            <input type="number" name="CA_LIMITE" value="0" onchange="update_CA()"><br>
+            <input type="number" name="limite" onchange="update_all()"><br>
             <span class="texto-menor">LIMITE</span>
           </div>
           <div class="col">
-            <span class="proficiencia_radio" data-nome="CA_PROFICIENCIA" data-proficiencia="" data-funcao="update_CA()"></span>
+            <span class="proficiencia_radio" data-funcao="update_all()"></span>
           </div>
           <div class="col">
-            <input type="number" name="CA_BONUS_ITEM" value="0" onchange="update_CA()"><br>
+            <input type="number" name="bonus_de_item" value="0" onchange="update_all()"><br>
             <span class="texto-menor">item</span>
           </div>
         </div>
       </div>
       <div id="armaduras">
         <div class="row">
-            <div class="col">
+            <div class="col sem_armadura">
               <span class="texto-menor">Sem Armadura</span><br>
-              <span class="proficiencia_radio" data-nome="defesa_sem_armadura" data-proficiencia="" data-funcao=""></span>
+              <span class="proficiencia_radio" data-funcao=""></span>
             </div>
-            <div class="col">
+            <div class="col leve">
               <span class="texto-menor">Leve</span><br>
-              <span class="proficiencia_radio" data-nome="armadura_leve" data-proficiencia="" data-funcao=""></span>
+              <span class="proficiencia_radio" data-funcao=""></span>
             </div>
-            <div class="col">
+            <div class="col media">
               <span class="texto-menor">Média</span><br>
-              <span class="proficiencia_radio" data-nome="armadura_media" data-proficiencia="" data-funcao=""></span>
+              <span class="proficiencia_radio" data-funcao=""></span>
             </div>
-            <div class="col">
+            <div class="col pesada">
               <span class="texto-menor">Pesada</span><br>
-              <span class="proficiencia_radio" data-nome="armadura_pesada" data-proficiencia="" data-funcao=""></span>
+              <span class="proficiencia_radio" data-funcao=""></span>
             </div>
         </div>
       </div>
@@ -477,23 +314,23 @@
         <div class="col table_titulo" class="subtitulo">escudo</div>
         <div class="row">
           <div class="col">
-            <input type="number" name="escudo" value="0"><br>
+            <input type="number" name="valor" value="0"><br>
             <span class="texto-menor">Escudo</span>
           </div>
           <div class="col">
-            <input type="number" name="escudo_dureza" value="0"><br>
+            <input type="number" name="dureza" value="0"><br>
             <span class="texto-menor">Dureza</span>
           </div>
           <div class="col">
-            <input type="number" name="escudo_pv_max" value="0"><br>
+            <input type="number" name="pv_max" value="0"><br>
             <span class="texto-menor">PV Max</span>
           </div>
           <div class="col">
-            <input type="number" name="escudo_limiar" value="0"><br>
+            <input type="number" name="limiar" value="0"><br>
             <span class="texto-menor">LQ</span>
           </div>
           <div class="col">
-            <input type="number" name="escudo_pv_atual" value="0"><br>
+            <input type="number" name="pv_atual" value="0"><br>
             <span class="texto-menor">PV atuais</span>
           </div>
         </div>
@@ -549,9 +386,11 @@
 
 
       </div>
-      <input type="submit">
+      <input type="submit" style="display: none;">
     </div>
-  </form>
+    <div class="container visualizar">
+    </div>
+  </div>
   <script src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="../../publico/funções.js"></script>
   <script type="text/javascript" src="../../publico/ficha-de-personagem.js"></script>

@@ -59,7 +59,6 @@ body{
   margin: auto;
 /*  background-color: #9C5740;*/
 }
-
 .table_titulo{
   background-color: #13265F;
   background: #07153e;
@@ -166,7 +165,12 @@ input{
   color: #000;
   text-align: center;
 }
-
+#help_atributos input[type="checkbox"]{
+  height: 1.5em;
+  width: 1.5em;
+  background-color: red;
+  border-radius: 15px;
+}
 input[type="number"]{
   width: 2em;
 }
@@ -273,7 +277,26 @@ input[type="number"][name="VELOCIDADE"]{
 
 /*      CRIAÇÃO ATRIBUTOS     */
 
+#help_atributos .row{
+  display: flex;
+  justify-content: space-around;
+/*  margin-top: 1em;*/
+}
 
+#help_atributos .aumento{
+  color: lightgreen;
+  text-shadow: 2px 0 #005a0e, -2px 0 #005a0e, 0 2px #005a0e, 0 -2px #005a0e, 1px 1px #005a0e, -1px -1px #005a0e, 1px -1px #005a0e, -1px 1px #005a0e;
+}
+#help_atributos .penalidade{
+  color: orangered;
+  text-shadow: 2px 0 #5A0A00, -2px 0 #5A0A00, 0 2px #5A0A00, 0 -2px #5A0A00, 1px 1px #5A0A00, -1px -1px #5A0A00, 1px -1px #5A0A00, -1px 1px #5A0A00;
+}
+#help_atributos .row:has(.aumento)+.row input{
+  outline: 2px double lightgreen;
+}
+#help_atributos .row:has(.penalidade)+.row input{
+  outline: 2px double orangered;
+}
 
 /*      ATRIBUTOS     */
 
@@ -731,45 +754,21 @@ textarea{
 .PL{
   color: #726b67;
 }
-.container.visualizar hr{
-  margin-left: -1em;
-}
 .container.visualizar{
   border: none;
   margin-top: 2em;
-  width: auto;
-  max-width: 500px;
-  text-indent: -1em;
-/*  margin-left: 1em;*/
-}
-.container.visualizar .ação-icon{
-  height: 1.1em;
-}
-.container.visualizar .traços{
-  margin: .4em 0;
-  font-family: monospace;
-    letter-spacing: -.05em;
-  font-size: 1.2em;
-}
-.container.visualizar .traço{
-  padding: 0px 1em;
-  background-color: #5E0000;
-  border: 2px solid #D9C484;
-  color: white;
-  font-weight: bold;
-}
-.container.visualizar .tamanho{
- background-color: #3B7B59;
 }
 .container.visualizar strong{
 /*  font-weight: ;*/
 }
-.container.visualizar .titulo{
-  display: flex;
-  justify-content: space-between;
-  font-family: monospace;
-    letter-spacing: -.05em;
-  font-size: 1.2em;
+.container.visualizar .traços{
+  color: #fff;
+  background-color: #5A0A00;
+  font-weight: bold;
+  font-size: .8em;
+  border: 3px solid #E4D6B0;
+  margin-top: 5px;
+  padding: 0 2px;
 }
 .visualizar{
   font-family: 'Open Sans';

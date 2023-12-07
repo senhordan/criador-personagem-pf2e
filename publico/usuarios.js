@@ -52,7 +52,7 @@ const adicionar_usuario = ()=>{
 }
 
 socket.emit('usuarios')
-socket.on('retorno usuarios', (array_usuarios)=>{
+socket.once('retorno usuarios', (array_usuarios)=>{
   if (typeof array_usuarios == 'string') {array_usuarios = [array_usuarios]}
     array_usuarios.forEach(usuario=>{
       criar_novo_usuario(usuario)
@@ -63,7 +63,7 @@ const abrir_popup = (elemento)=>{
 
   popup.innerHTML = `
     <h2>${elemento.value}</h2>
-    <button onclick="ver_tokens('${elemento.value}')">Ver Tokens</button>
+    <a href="/usuario/${elemento.value}"><button>Ver Tokens</button></a>
     <button onclick="editar_usuario('${elemento.value}')">Editar Usuario</button>
     <button onclick="remover_usuario('${elemento.value}')">Remover Usuario</button>
     <button onclick="fechar_popup()">Fechar</button>
@@ -88,9 +88,9 @@ const editar_usuario = (nome)=>{
   fechar_popup()
 }
 
-const ver_tokens = (nome)=>{
-  form([{"nome": "usuario", "valor": nome}])
-}
+// const ver_tokens = (nome)=>{
+//   form([{"nome": "usuario", "valor": nome}])
+// }
 
 const remover_usuario = (nome)=>{
   const resposta = confirm(`Deseja remover o usuario ${nome}? \nTodos os token serão excluidos, essa ação não poderá ser desfeita`)

@@ -17,31 +17,26 @@ app.use('/publico', express.static(path.join(__dirname, 'publico')))
 
 app.set('views', path.join(__dirname, 'publico'))
 
-const pasta_usuarios = './usuarios'
-
 const criar_novo_usuario = (nome)=>{
-  fs.mkdirSync(`${pasta_usuarios}/${nome}`, { recursive: true })
+  fs.mkdirSync(`./usuarios/${nome}`, { recursive: true })
 }
 
 const usuarios = ()=>{
-  let pastas = fs.readdirSync(pasta_usuarios)
-  if (typeof pastas != 'object') {
-    pastas = [pastas]
-  }
+  
   return pastas
 }
 
 const remover_usuario = (usuario)=>{
-  fs.rmdir(`${pasta_usuarios}/${usuario}`, { recursive: true }, ()=>{})
+  fs.rmdir(`./usuarios/${usuario}`, { recursive: true }, ()=>{})
 }
 
 const editar_usuario = (usuario_antigo, novo_usuario)=>{
-  fs.renameSync(`${pasta_usuarios}/${usuario_antigo}`, `${pasta_usuarios}/${novo_usuario}`, ()=>{})
+  fs.renameSync(`./usuarios/${usuario_antigo}`, `./usuarios/${novo_usuario}`, ()=>{})
 }
 
 const remover_token = (usuario, token_nome)=>{
   try {
-    fs.unlinkSync(`${pasta_usuarios}/${usuario}/${token_nome}.json`)
+    fs.unlinkSync(`./usuarios/${usuario}/${token_nome}.json`)
     fs.unlinkSync(`./publico/img/${token_nome}.png`)
   } catch(e) {
     console.log(e);
@@ -75,7 +70,12 @@ app.get('/', (req, res)=>{
     })
 
     socket.on('usuarios', ()=>{
-      socket.emit('retorno usuarios', usuarios())
+      let usuarios = fs.readdirSync('./usuarios')
+      if (typeof usuarios != 'object') {
+        usuarios = [usuarios]
+      }
+      // console.log(usuarios)
+      socket.emit('retorno usuarios', usuarios)
     })
 
     socket.on('editar nome de usuario', (array)=>{editar_usuario(array[0], array[1])})
@@ -91,8 +91,8 @@ app.get('/', (req, res)=>{
 app.get('/usuario/:usuario', (req, res)=>{
   io.once('connection', (socket)=>{
     socket.once('tokens', (usuario)=>{
-
-      let tokens_json = fs.readdirSync(`${pasta_usuarios}/${usuario}`)
+      console.log(usuario)
+      let tokens_json = fs.readdirSync(`./usuarios/${usuario}`)
 
       if (typeof tokens_json != 'object') {tokens_json = [tokens_json]}
 
@@ -110,9 +110,8 @@ app.get('/usuario/:usuario', (req, res)=>{
     socket.on('criar token', (array)=>{
       const [usuario, token_nome] = array
       const obj = JSON.parse(fs.readFileSync('./ficha.json', 'utf-8'))
-      obj.NOME = token_nome
 
-      fs.writeFileSync(`./${pasta_usuarios}/${usuario}/${token_nome}.json`, JSON.stringify(obj, null, 2))
+      fs.writeFileSync(`./usuarios/${usuario}/${token_nome}.json`, JSON.stringify(obj, null, 2))
 
       fs.copyFileSync('./publico/img/undefined.png', `./publico/img/${token_nome}.png`)
       // console.log(obj)
@@ -130,7 +129,6 @@ app.get('/usuario/:usuario', (req, res)=>{
       fs.renameSync(`./publico/img/${token_nome}.png`, `./publico/img/${novo_nome}.png`, (err)=>{console.log(err)})
 
       const ficha = JSON.parse(fs.readFileSync(`./usuarios/${usuario}/${novo_nome}.json`, 'utf-8'))
-      ficha.NOME = novo_nome
       fs.writeFileSync(`./usuarios/${usuario}/${novo_nome}.json`, JSON.stringify(ficha, '', 2), ()=>{})
     })
     
@@ -147,12 +145,15 @@ app.get('/usuario/:usuario/:token', (req, res)=>{
       const usuario = usuario_token[0]
       const token = usuario_token[1]
 
+        console.log(usuario)
+        console.log(token)
       try {
-        const file = fs.readFileSync(`${pasta_usuarios}/${usuario}/${token}.json`, 'utf-8')
+        const file = fs.readFileSync(`./usuarios/${usuario}/${token}.json`, 'utf-8')
         const json = JSON.parse(file)
         socket.emit('retorno ficha', json)
         // statements
       } catch(e) {
+        console.log(e)
         console.log('token não existe');
       }
 
@@ -163,17 +164,17 @@ app.get('/usuario/:usuario/:token', (req, res)=>{
       const usuario = usuario_token_ficha[0]
       const token = usuario_token_ficha[1]
       const ficha = usuario_token_ficha[2]
-      fs.writeFileSync(`${pasta_usuarios}/${usuario}/${token}.json`, JSON.stringify(ficha, null, 2), ()=>{console.log(ficha)})
+      fs.writeFileSync(`./usuarios/${usuario}/${token}.json`, JSON.stringify(ficha, null, 2), ()=>{console.log(ficha)})
 
-      if (token != ficha.NOME) {
-        // console.log(token)
-        // console.log(ficha.NOME)
-        // console.log(fs.readFileSync(`./usuarios/Dan/${token}.json`, 'utf-8'))
+      // if (token != ficha.NOME) {
+      //   // console.log(token)
+      //   // console.log(ficha.NOME)
+      //   // console.log(fs.readFileSync(`./usuarios/Dan/${token}.json`, 'utf-8'))
 
-        // console.log(fs.readdirSync(pasta_usuarios+"/Dan"))
-        fs.renameSync(`./usuarios/${usuario}/${token}.json`, `./usuarios/${usuario}/${ficha.NOME}.json`, (err)=>{console.log(err)})
-        fs.renameSync(`./publico/img/${token}.png`, `./publico/img/${ficha.NOME}.png`, (err)=>{console.log(err)})
-      }
+      //   // console.log(fs.readdirSync('./usuarios'+"/Dan"))
+      //   fs.renameSync(`./usuarios/${usuario}/${token}.json`, `./usuarios/${usuario}/${ficha.NOME}.json`, (err)=>{console.log(err)})
+      //   fs.renameSync(`./publico/img/${token}.png`, `./publico/img/${ficha.NOME}.png`, (err)=>{console.log(err)})
+      // }
 
     })
 
@@ -215,6 +216,8 @@ const { exec } = require('child_process')
 
 
 http.listen(porta, ip, ()=>{
+// ip = 'localhost'
+// http.listen(porta, 'localhost', ()=>{
   console.log(`http://${ip}:${porta}`)
 
   try {
