@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ficha</title>
-  <link rel="stylesheet" href="../../publico/ficha.css">
+  <link rel="stylesheet" href="./ficha.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
@@ -294,19 +294,19 @@
         <div class="row">
             <div class="col sem_armadura">
               <span class="texto-menor">Sem Armadura</span><br>
-              <span class="proficiencia_radio" data-funcao=""></span>
+              <span class="proficiencia_radio" data-funcao="update_armaduras()"></span>
             </div>
             <div class="col leve">
               <span class="texto-menor">Leve</span><br>
-              <span class="proficiencia_radio" data-funcao=""></span>
+              <span class="proficiencia_radio" data-funcao="update_armaduras()"></span>
             </div>
             <div class="col media">
               <span class="texto-menor">Média</span><br>
-              <span class="proficiencia_radio" data-funcao=""></span>
+              <span class="proficiencia_radio" data-funcao="update_armaduras()"></span>
             </div>
             <div class="col pesada">
               <span class="texto-menor">Pesada</span><br>
-              <span class="proficiencia_radio" data-funcao=""></span>
+              <span class="proficiencia_radio" data-funcao="update_armaduras()"></span>
             </div>
         </div>
       </div>
@@ -314,23 +314,23 @@
         <div class="col table_titulo" class="subtitulo">escudo</div>
         <div class="row">
           <div class="col">
-            <input type="number" name="valor" value="0"><br>
+            <input type="number" name="valor" value="0" onchange="update_escudo()"><br>
             <span class="texto-menor">Escudo</span>
           </div>
           <div class="col">
-            <input type="number" name="dureza" value="0"><br>
+            <input type="number" name="dureza" value="0" onchange="update_escudo()"><br>
             <span class="texto-menor">Dureza</span>
           </div>
           <div class="col">
-            <input type="number" name="pv_max" value="0"><br>
+            <input type="number" name="pv_max" value="0" onchange="update_escudo()"><br>
             <span class="texto-menor">PV Max</span>
           </div>
           <div class="col">
-            <input type="number" name="limiar" value="0"><br>
+            <input type="number" name="limiar" value="0" onchange="update_escudo()"><br>
             <span class="texto-menor">LQ</span>
           </div>
           <div class="col">
-            <input type="number" name="pv_atual" value="0"><br>
+            <input type="number" name="pv_atual" value="0" onchange="update_escudo()"><br>
             <span class="texto-menor">PV atuais</span>
           </div>
         </div>
@@ -382,19 +382,58 @@
             <label id="adicionar_item" onclick="adicionar_item()">Adicionar item</label>
           </div>
         </div>
-
-
+        <div id="moedas" class="row inventario-infos">
+          <div class="col">
+            <span class="texto-menor PC">PC</span><br>
+            <input type="number" name="PC" value="0">
+          </div>
+          <div class="col">
+            <span class="texto-menor PP">PP</span><br>
+            <input type="number" name="PP" value="0">
+          </div>
+          <div class="col">
+            <span class="texto-menor PO">PO</span><br>
+            <input type="number" name="PO" value="0">
+          </div>
+          <div class="col">
+            <span class="texto-menor PL">PL</span><br>
+            <input type="number" name="PL" value="0">
+          </div>
+        </div>
+        <div class="row inventario-infos">
+          <div class="col">
+            <span class="texto-menor">Vol. Atual</span><br>
+            <input type="text" disabled name="volume">
+          </div>
+          <div class="col">
+            <span class="texto-menor">Sobrecarregado</span><br>
+            <input type="text" disabled value="0" name="sobrecarregado">
+          </div>
+          <div class="col">
+            <span class="texto-menor">Limite</span><br>
+            <input type="text" disabled value="0" name="limite">
+          </div>
+        </div>
 
       </div>
-      <input type="submit" style="display: none;">
+    <div id="json">
+      <div class="row">
+        <div class="col table_titulo">
+          Import/Export
+        </div>
+      </div>
+      <textarea rows="5" onclick="this.select()"></textarea>
+      <input type="button" value="Importar">
+    </div>
+      <!-- <input type="submit" style="display: none;"> -->
     </div>
     <div class="container visualizar">
     </div>
   </div>
-  <script src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript" src="../../publico/funções.js"></script>
-  <script type="text/javascript" src="../../publico/ficha-de-personagem.js"></script>
-  <script type="text/javascript" src="../../publico/inventario.js"></script>
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <script type="text/javascript" src="./ficha_limpa.js"></script>
+  <script type="text/javascript" src="./funções.js"></script>
+  <script type="text/javascript" src="./ficha-de-personagem.js"></script>
 </body>
 </html>
 

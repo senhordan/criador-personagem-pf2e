@@ -1,4 +1,4 @@
-{
+const ficha_limpa = {
   "nome": "",
   "ancestralidade_e_heranca": "",
   "biografia": "",
@@ -12,7 +12,7 @@
   "maxhp": "1",
   "hp": "1",
   "velocidade": "1",
-  "tamanho": "normal",
+  "tamanho": "medio",
   "visao": "normal",
   "salvamentos": {
     "fortitude": {
@@ -35,34 +35,34 @@
     }
   },
   "cd_de_classe": {
-    "valor": "0",
+    "valor": "10",
     "atributo_chave": "-",
     "proficiencia": "destreinado",
     "bonus_de_item": "0"
   },
   "atributos": {
     "FOR": {
-      "valor": "0",
+      "valor": "10",
       "mod": "0"
     },
     "DES": {
-      "valor": "0",
+      "valor": "10",
       "mod": "0"
     },
     "CON": {
-      "valor": "0",
+      "valor": "10",
       "mod": "0"
     },
     "INT": {
-      "valor": "0",
+      "valor": "10",
       "mod": "0"
     },
     "SAB": {
-      "valor": "0",
+      "valor": "10",
       "mod": "0"
     },
     "CAR": {
-      "valor": "0",
+      "valor": "10",
       "mod": "-0"
     }
   },
@@ -181,7 +181,7 @@
       "penalidade": 0
     },
     "Saber 1": {
-      "nome": "Submundo",
+      "nome": "",
       "valor": "0",
       "bonus_de_atributo": "0",
       "proficiencia": "destreinado",
@@ -242,5 +242,11 @@
     "proficiencia": "destreinado",
     "bonus_de_item": "0"
   },
-  "inventario": []
+  "inventario": [],
+  "moedas": {
+    "PC": "0",
+    "PP": "0",
+    "PO": "0",
+    "PL": "0"
+  }
 }

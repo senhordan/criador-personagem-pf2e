@@ -1,4 +1,4 @@
-const socket = io()
+// const socket = io()
 // const url = new URL(window.location.href); 
 // const getParam = url.searchParams.get('foo'); 
 // const url_base = window.location.href
@@ -20,26 +20,31 @@ const token = ()=>{
   return url().replace(/.*usuario\//, '').split('/')[1]
 }
 
-
 const update_token = ()=>{
-  console.log('update_token')
   // console.log(ficha)
-  socket.emit('update token', [usuario(), token(), ficha])
+  console.log('update_token')
+  localStorage.setItem('ficha', JSON.stringify(ficha))
 }
 
 const update_all = ()=>{
+  console.log('Update All')
   update_geral()
   update_modificador_atributo()
   update_salvamentos()
   update_percepção()
   update_CA()
   update_armaduras()
+  update_escudo()
   update_CD_classe()
   update_pericia()
   update_ataques()
+  update_inventario()
+  update_moedas()
+  document.querySelector('#json textarea').value = JSON.stringify(ficha)
   // checar_MaxHP()
   // gerar_ficha()
-  update_token()
+    update_token()
+
 }
 
 const update_geral = ()=>{
@@ -52,7 +57,7 @@ const update_modificador_atributo = ()=>{
   ficha.atributos = {}
   query('#atributos .row:has(input)').forEach(linha=>{
     const [input_valor, input_mod] = linha.querySelectorAll('input')
-    const atributo = linha.querySelector('.col').innerText
+    const atributo = linha.querySelector('.col label').innerText
 
     input_mod.value = Math.floor((input_valor.value-10)/2)
 
@@ -66,7 +71,7 @@ const update_modificador_atributo = ()=>{
 const update_salvamentos = ()=>{
   ficha.salvamentos = {}
   query('#salvamentos .row:has(table)').forEach(linha=>{
-    const salvamento = linha.querySelector('.col').innerText.toLowerCase()
+    const salvamento = linha.querySelector('.col label').innerText.toLowerCase()
     const valor = linha.querySelector(`[name="valor"]`)
     const atributo_base = linha.querySelector(`[name="bonus_de_atributo"]`).dataset.atributo
     const bonus_de_atributo = linha.querySelector(`[name="bonus_de_atributo"]`)
@@ -109,8 +114,7 @@ let ficha = {}
 // ficha.habilidades = []
 
 const importar = (json)=>{
-  // console.log(json)
-
+  console.log(json)
   Object.entries(json).forEach(i=>{
     if (typeof i[1] != 'object') {
       const elemento = document.querySelector(`[name=${i[0]}]`)
@@ -271,15 +275,19 @@ const importar = (json)=>{
     nova_item.querySelector('[onclick="salvar_item(this)"]').click()
   })
 
-  editar_visualizar()
-}
+  //  moedas
+  if (json.moedas) {
+    // console.log(json.moedas)
+    Object.entries(json.moedas).forEach(i=>{
+      document.querySelector(`[name="${i[0]}"]`).value = i[1]
+    })
+  }
 
-socket.emit('ficha de personagem', url_base().split('/'))
-socket.once('retorno ficha', json=>{
-  ficha = json
-  // console.log(json)
-  importar(ficha)
-})
+  update_all()
+
+  // editar_visualizar()
+  editar_visualizar('init')
+}
 
 const proficiencias = {
   'destreinado': ()=>{return +0},
@@ -314,7 +322,8 @@ const pericias_atb_base = {
   'Sociedade': 'Inteligência',
 }
 const gerar_ficha = ()=>{
-  console.log('ficha')
+  // console.log(ficha)
+  update_all()
   const div = query('.container.visualizar')
   div.innerHTML = ""
   div.innerHTML += `<div class="titulo"><h1>${ficha.nome.toUpperCase()}</h1> <h1>NIVEL ${ficha.nivel}</h1></div>`
@@ -365,7 +374,7 @@ const gerar_ficha = ()=>{
   ficha.ataques.forEach(i=>{
     let ataque = ''
 
-    ataque += `<div><strong>${i.tracos.toLowerCase().includes('incremento') ? `Distância` : `Corpo a Corpo`} </strong> <img class="ação-icon" src="../../publico/img/${i.acoes}.png"> 
+    ataque += `<div><strong>${i.tracos.toLowerCase().includes('incremento') ? `Distância` : `Corpo a Corpo`} </strong> <img class="ação-icon" src="./img/${i.acoes}.png"> 
           ${i.nome} ${i.total+i.primeiro_ataque >= 0 ? `+${i.total}` : `${i.total}`} 
            ${i.total+i.segundo_ataque >= 0 ? `+${i.total+i.segundo_ataque}` : `${i.total+i.segundo_ataque}`}  
            ${i.total+i.terceiro_ataque >= 0 ? `+${i.total+i.terceiro_ataque}` : `${i.total+i.terceiro_ataque}`} (${i.tracos}), <strong>Dano</strong>`
@@ -381,6 +390,7 @@ const gerar_ficha = ()=>{
 
     ataque += ` ${dano.join(' mais ')} </div>`
     div.innerHTML += ataque
+    div.innerHTML += `<hr>`
   })
 
   // div.innerHTML += 
@@ -388,7 +398,7 @@ const gerar_ficha = ()=>{
   ficha.acoes.forEach(i=>{
     if (i.descricao_curta != '') {
       ações += `<div>`
-      ações += `<strong>${i.nome}</strong> <img class="ação-icon" src="../../publico/img/${i.tipo}.png"> `
+      ações += `<strong>${i.nome}</strong> <img class="ação-icon" src="./img/${i.tipo}.png"> `
       ações += `${i.acionamento != '' ? `<strong>Acionamento</strong> ${i.acionamento}. ` : ''}`
       ações += `${i.requerimento != '' ? `<strong>Requerimento</strong> ${i.requerimento}. ` : ''}`
       if (i.acionamento || i.requerimento) {
@@ -401,6 +411,8 @@ const gerar_ficha = ()=>{
     // `</div>`
   })
   div.innerHTML += ações
+  div.innerHTML += `<hr>`
+  
 
   let habilidades = ''
   ficha.habilidades.forEach(i=>{
@@ -419,30 +431,39 @@ const gerar_ficha = ()=>{
 
 }
 const modo_edição = ()=>{
+  const col = query('#editar_visualizar .col')
+  col.innerText = 'Visualizar'
+  col.className = 'col table_titulo editar'
   query('.container.editar').style.display = ''
   query('.container.visualizar').style.display = 'none'
 
 }
 const modo_visualização = ()=>{
+  const col = query('#editar_visualizar .col')
+  col.innerText = 'Editar'
+  col.className = 'col table_titulo visualizar'
   query('.container.visualizar').style.display = ''
   query('.container.editar').style.display = 'none'
-  gerar_ficha()
+  // update_token()
 }
 
-const editar_visualizar = ()=>{
+const editar_visualizar = (init)=>{
   const col = query('#editar_visualizar .col')
+  if (init) {
+    modo_edição()
+    console.log('init')
+    return
+  }
 
   if (col.innerText == 'Editar') {
-    col.innerText = 'Visualizar'
-    col.className = 'col table_titulo editar'
     console.log('modo edição')
     modo_edição()
 
   } else {
-    col.innerText = 'Editar'
-    col.className = 'col table_titulo visualizar'
     console.log('modo visualizar')
+    update_token()
     modo_visualização()
+    gerar_ficha()
   }
 }
   
@@ -510,7 +531,6 @@ const update_armaduras = ()=>{
     "media": query('#armaduras .media :checked').value,
     "pesada": query('#armaduras .pesada :checked').value
   }
-
 }
 
 // escudo
@@ -871,7 +891,6 @@ const salvar_habilidade = (elemento)=>{
       descricao_curta: descrição_curta
     }
 
-  update_token()
 }
 
 const editar_habilidade = (elemento)=>{
@@ -897,7 +916,6 @@ const remover_habilidade = (elemento)=>{
   div.remove()
 
 
-  update_token()
 }
 //  -------------------------AÇÃO-------------------------
 
@@ -1008,7 +1026,7 @@ const salvar_ação = (elemento)=>{
           <label>${nome}</label>
         </div>
         <div class="col">            
-          <img class="ação-icon" src="../../publico/img/${tipo}.png">
+          <img class="ação-icon" src="./img/${tipo}.png">
         </div>
       </div>
       <div class="descrição" style="display:none;">
@@ -1064,7 +1082,6 @@ const salvar_ação = (elemento)=>{
       descricao_curta: descrição_curta
     }
 
-  update_token()
 }
 
 const editar_ação = (elemento)=>{
@@ -1100,7 +1117,6 @@ const remover_ação = (elemento)=>{
   div.remove()
 
 
-  update_token()
 }
 
 //  -------------------------ATAQUE-------------------------
@@ -1321,7 +1337,6 @@ const salvar_ataque = (elemento)=>{
   div.appendChild(div_mostrar)
 
 
-  update_token()
 }
 
 const editar_ataque = (elemento)=>{
@@ -1342,7 +1357,6 @@ const remover_ataque = (elemento)=>{
   ficha.ataques.splice(posição ,1)
   div.remove()
 
-  update_token()
 }
 
 const update_ataques = (elemento)=>{
@@ -1443,7 +1457,6 @@ const remover_dano = (elemento)=>{
   }
   div.remove()
 
-  update_token()
 }
 
 // ITENS
@@ -1467,6 +1480,45 @@ const remover_dano = (elemento)=>{
 //   })
 
 // }
+const update_inventario = ()=>{
+  let moedas = 0
+  let volumes = []
+  document.querySelectorAll('#inventario .item').forEach(i=>{
+  const volume = i.querySelector('[name="volume"]').value
+  const custo = Number(i.querySelector('[name="custo"]').value)
+
+  const peça = i.querySelector('[name="peca"]').value
+  const quantidade = Number(i.querySelector('[name="quantidade"]').value)
+
+  if (custo > 0) {moedas += custo}
+  if (volume != '-') {
+    let i = quantidade
+    while (i != 0) {
+      volumes.push(volume)
+      i --
+    }
+  }
+    
+  })
+  const moedas_volume = Math.floor(moedas/1000)
+  // console.log(volumes)
+  let volumes_leves = 0
+  let volumes_inteiros = 0
+  volumes.forEach(i=>{
+    if (i.toUpperCase() == "L") {volumes_leves ++} else {
+      // console.log(i)
+      volumes_inteiros += Number(i)
+    }
+  })
+  // console.log([Math.floor(volumes_leves/10),volumes_inteiros])
+  document.querySelector('#inventario [name="volume"]').value = Math.floor(volumes_leves/10) + volumes_inteiros
+
+  const modificador_for = Number(document.querySelector('#atributos .for [name="mod"]').value)
+
+  document.querySelector('#inventario [name="sobrecarregado"]').value = modificador_for+5
+
+  document.querySelector('#inventario [name="limite"]').value = modificador_for+10
+}
 
 const editar_item = (elemento)=>{
   // console.log(elemento.closest('[data-item]').querySelector('.editar'))
@@ -1559,7 +1611,7 @@ const salvar_item = (elemento)=>{
       descricao: descrição
     }
 
-  update_token()
+  update_all()
 }
 
 const remover_item = (elemento)=>{
@@ -1574,7 +1626,6 @@ const remover_item = (elemento)=>{
   ficha.inventario.splice(posição ,1)
   div.remove()
 
-  update_token()
 }
 
 const adicionar_item = ()=>{
@@ -1599,7 +1650,7 @@ const adicionar_item = ()=>{
         </div>
         <div class="col">
           <span class="texto-maior">Custo</span><br>
-          <input type="number" name="custo">
+          <input type="number" name="custo" value="0">
           <select name="peca">
             <option value="PC">PC</option>
             <option value="PP" selected>PP</option>
@@ -1651,6 +1702,54 @@ const mostrar_enconder_descrição_item = (elemento)=>{
   } else {
     textarea.style.display = 'none'
   }
+}
+
+
+//         MOEDAS
+
+const update_moedas = ()=>{
+  const PC = document.querySelector('#moedas [name="PC"]').value
+  const PP = document.querySelector('#moedas [name="PP"]').value
+  const PO = document.querySelector('#moedas [name="PO"]').value
+  const PL = document.querySelector('#moedas [name="PL"]').value
+
+  ficha.moedas = {
+    PC : PC,
+    PP : PP,
+    PO : PO,
+    PL : PL
+  }
+}
+
+
+const limpar_areas = ()=>{
+  document.querySelectorAll('.item').forEach(i=>{i.remove()})
+  document.querySelectorAll('.ataque').forEach(i=>{i.remove()})
+  document.querySelectorAll('.acao').forEach(i=>{i.remove()})
+  document.querySelectorAll('.habilidade').forEach(i=>{i.remove()})
+
+}
+document.querySelector('[value="Importar"]').onclick = ()=>{
+  const textarea = document.querySelector('#json textarea')
+  limpar_areas()
+  if (textarea.value) {
+    const json = JSON.parse(textarea.value)
+    ficha = json
+    importar(json)
+  } else {
+    ficha = ficha_limpa
+    importar(ficha_limpa)
+  }
+  // importar(JSON.parse(textarea.value))
+}
+
+if (localStorage.getItem('ficha')) {
+  const json = JSON.parse(localStorage.getItem('ficha'))
+  ficha = json
+  importar(json)
+} else {
+  ficha = ficha_limpa
+  importar(ficha_limpa)
 }
 
 editar_visualizar()
